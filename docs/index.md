@@ -1,3 +1,3 @@
 # How-To
 
-This project is build with [mkdocs](https://www.mkdocs.org).
+This is a how-to guide for common bioinformatics tasks.
