@@ -1,0 +1,7 @@
+site_name: Palomero Lab How-To
+
+theme:
+  name: readthedocs
+
+markdown_extensions:
+  - markdown_gfm_admonition
