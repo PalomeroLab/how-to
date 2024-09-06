@@ -1,5 +1,7 @@
 # How-To
 
+![logo](img/CUIMC_Horizontal_Blue.png)
+
 Welcome to the Palomero Lab How-To guide!
 This is a collection of instructions and tips for common bioinformatics tasks,
 focused on Linux-based workflows and AWS cloud computing.
@@ -14,6 +16,13 @@ This guide covers a range of topics including:
 - Writing effective scripts for automation
 - Using Rstudio and Jupyter notebooks for data analysis
  
+> [!TIP]
+> These files are written using [GitHub Flavored Markdown \(GFM\)](https://github.github.com/gfm/),
+> a superset of the [original](https://daringfireball.net/projects/markdown/syntax)
+> lightweight markup language with plain text formatting syntax.
+> GFM gives us additional features (like tables, footnotes, and alerts
+> like this) while maintaining readability in plain text.
+
 ## How to use this guide
 
 - Browse the sidebar to find the topic you're interested in
