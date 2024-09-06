@@ -1,7 +1,4 @@
 <!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
-{% extends "base.html" %}
-
-{% block content %} 
-{{ super() }}
+{% extends "base.html" %} {% block content %} {{ super() }}
 <small><i>Updated: {{ page.meta.file_date }}</i></small>
 {% endblock %}

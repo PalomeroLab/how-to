@@ -1,4 +1,4 @@
-#  Bash scripting
+# Bash scripting
 
 ## Resources
 
