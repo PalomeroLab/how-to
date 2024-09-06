@@ -9,18 +9,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Create the copy button
         var copyButton = document.createElement('button');
-        copyButton.textContent = 'Copy';
+        copyButton.innerHTML = '<i class="fa-solid fa-copy"></i><i class="fa-solid fa-check"></i>';
         copyButton.className = 'snippet-clipboard-copy-button';
         copyButton.id = 'snippet-clipboard-copy-button-' + index;
         wrapper.appendChild(copyButton);
+
+        // Create tooltip
+        var tooltip = document.createElement('span');
+        tooltip.textContent = 'Copied to clipboard!';
+        tooltip.className = 'copy-tooltip';
+        wrapper.appendChild(tooltip);  // Append to wrapper instead of button
 
         // Add click event listener to the copy button
         copyButton.addEventListener('click', function() {
             var code = codeBlock.textContent;
             navigator.clipboard.writeText(code).then(function() {
-                copyButton.textContent = 'Copied!';
+                copyButton.classList.add('copied');
+                tooltip.classList.add('show');
                 setTimeout(function() {
-                    copyButton.textContent = 'Copy';
+                    copyButton.classList.remove('copied');
+                    tooltip.classList.remove('show');
                 }, 2000);
             }).catch(function(err) {
                 console.error('Failed to copy: ', err);

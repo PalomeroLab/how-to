@@ -15,7 +15,7 @@ This guide covers a range of topics including:
 - Managing data with command-line interfaces
 - Writing effective scripts for automation
 - Using Rstudio and Jupyter notebooks for data analysis
- 
+
 > [!TIP]
 > These files are written using [GitHub Flavored Markdown \(GFM\)](https://github.github.com/gfm/),
 > a superset of the [original](https://daringfireball.net/projects/markdown/syntax)
