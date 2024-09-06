@@ -2,7 +2,7 @@
 
 Welcome to the Palomero Lab How-To guide!
 This is a collection of instructions and tips for common bioinformatics tasks,
-primarily focused on Linux-based workflows and computational methods.
+focused on Linux-based workflows and AWS cloud computing.
 
 ## What's in this guide?
 
@@ -12,8 +12,8 @@ This guide covers a range of topics including:
 - Running bioinformatics tools and pipelines
 - Managing data with command-line interfaces
 - Writing effective scripts for automation
-- Using Jupyter notebooks for analysis
-
+- Using Rstudio and Jupyter notebooks for data analysis
+ 
 ## How to use this guide
 
 - Browse the sidebar to find the topic you're interested in
