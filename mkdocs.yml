@@ -14,6 +14,6 @@ theme:
 markdown_extensions:
   - markdown_gfm_admonition
 
-plugins:  
+plugins:
   - search
   - macros
