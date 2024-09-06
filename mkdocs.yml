@@ -2,6 +2,15 @@ site_name: Palomero Lab How-To
 
 theme:
   name: readthedocs
+  custom_dir: custom_theme
+  features:
+    - navigation.footer
 
 markdown_extensions:
   - markdown_gfm_admonition
+
+plugins:
+  - search
+  - git-revision-date
+
+copyright: 'Copyright &copy; 2024 <a href="https://rdnajac.tech/">Ryan D. Najac</a>'
