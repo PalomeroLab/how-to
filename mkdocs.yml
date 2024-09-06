@@ -1,14 +1,19 @@
 site_name: Palomero Lab How-To
+site_url: https://palomerolab.github.io/how-to/
+repo_url: https://github.com/palomeroLab/how-to/
+edit_uri: blob/main/docs/
+site_description: A collection of how-to guides for the Palomero Lab
+site_author: Ryan D. Najac
+copyright: Copyright &copy; 2024 <a href="https://rdnajac.tech/">Ryan D. Najac</a>
 
 theme:
   name: readthedocs
   custom_dir: custom_theme/
-  features:
-    - navigation.footer
+  prev_next_buttons_location: top
 
 markdown_extensions:
   - markdown_gfm_admonition
 
-plugins:
+plugins:  
   - search
-  - git-revision-date
+  - macros

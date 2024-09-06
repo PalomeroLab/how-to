@@ -1,0 +1,12 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+{% extends "base.html" %}
+{% block content %}
+{{ super() }}
+
+<small><i>
+Updated:
+{% if page and page.meta.file_date %}
+{{ page.meta.file_date }} 
+{% endif %}
+</i></small>
+{% endblock %}

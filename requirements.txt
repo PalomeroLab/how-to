@@ -1,3 +1,3 @@
 mkdocs
+mkdocs-macros-plugin
 markdown-gfm-admonition
-mkdocs-git-revision-date-plugin
