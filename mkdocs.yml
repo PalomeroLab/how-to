@@ -13,7 +13,14 @@ theme:
 
 markdown_extensions:
   - markdown_gfm_admonition
+  - pymdownx.superfences
 
 plugins:
   - search
   - macros
+
+extra_css:
+  - style.css
+
+extra_javascript:
+  - extra.js
