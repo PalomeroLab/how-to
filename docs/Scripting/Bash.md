@@ -1,4 +1,4 @@
-# Scripting with `bash`
+#  Bash scripting
 
 ## Resources
 
@@ -8,6 +8,7 @@
 - [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/)
 - [Safety First!](https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md)
 - [Bashisms](https://mywiki.wooledge.org/Bashism)
+- [Bash Pitfalls](https://mywiki.wooledge.org/BashPitfalls)
 - [Arrays in Bash](https://mywiki.wooledge.org/BashFAQ/005)
 - [Shell Script Templates](https://stackoverflow.com/questions/430078/shell-script-templates)
 - [Command Name Extensions Considered Harmful](https://www.talisman.org/~erlkonig/documents/commandname-extensions-considered-harmful/)
