@@ -16,7 +16,7 @@ This guide covers a range of topics including:
 - Writing effective scripts for automation
 - Using Rstudio and Jupyter notebooks for data analysis
 
-> [!TIP]
+> [!NOTE]
 > These files are written using [GitHub Flavored Markdown \(GFM\)](https://github.github.com/gfm/),
 > a superset of the [original](https://daringfireball.net/projects/markdown/syntax)
 > lightweight markup language with plain text formatting syntax.
@@ -42,18 +42,13 @@ echo "Hello, world!"
 You can copy and paste these blocks directly into your terminal by
 clicking the clipboard icon in the top right corner of the block.
 
-> [!INFO]
+> [!TIP]
 > Checkout this [gist](https://gist.github.com/rdnajac)
 > to learn how the clipboard icon works.
 
-## Getting started
+## Contributing
 
-If you're new to computational bioinformatics, we recommend starting with the AWS and
-Scripting sections to get familiar with the basic tools and environments.
-
-Remember, this is a living document.
-It's continuously updated as we discover new tools and better ways of doing things.
-If you have any questions or suggestions, please reach out, submit an issue, or
-make a pull request.
+Click on the "Edit this page" link at the bottom of any page to suggest changes
+or additions. You can also fork this repository and submit a pull request.
 
 Happy computing!
