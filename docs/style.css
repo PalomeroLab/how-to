@@ -1,70 +1,47 @@
-.snippet-clipboard-content {
-    position: relative;
+.clipboard-wrapper {
+  position: relative;
 }
 
-.snippet-clipboard-copy-button {
-    position: absolute;
-    top: 3px;
-    right: 3px;
-    padding: 5px 8px;
-    font-size: 14px;
-    color: #24292e;
-    background-color: #f6f8fa;
-    border: 1px solid rgba(27,31,35,.1);
-    border-radius: 3px;
-    cursor: pointer;
+.clipboard-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 6px 8px;
+  background-color: #f6f8fa;
+  border: 1px solid rgba(27, 31, 35, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
 }
 
-.snippet-clipboard-copy-button:hover {
-    background-color: #e1e4e8;
+.clipboard-button:hover {
+  background-color: #e1e4e8;
 }
 
-.snippet-clipboard-copy-button i {
-    transition: opacity 0.2s ease-in-out;
+.clipboard-tooltip {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  right: 0;
+  margin-bottom: 5px;
+  padding: 6px 12px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 13px;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  transform: translateY(10px);
 }
 
-.snippet-clipboard-copy-button .fa-check {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-}
-
-.snippet-clipboard-copy-button.copied .fa-copy {
-    opacity: 0;
-}
-
-.snippet-clipboard-copy-button.copied .fa-check {
-    opacity: 1;
-}
-
-.copy-tooltip {
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    font-size: 12px;
-    color: #fff;
-    background-color: #333;
-    border-radius: 3px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    pointer-events: none;
-    white-space: nowrap;
-}
-
-.copy-tooltip::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    right: 10px;
-    border-width: 5px 5px 0;
-    border-style: solid;
-    border-color: #333 transparent transparent;
-}
-
-.copy-tooltip.show {
-    opacity: 1;
+.clipboard-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
 }
