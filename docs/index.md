@@ -30,6 +30,22 @@ This guide covers a range of topics including:
 - Each page contains step-by-step instructions and helpful tips
 - Code blocks can be copied and pasted directly into your terminal
 
+### Code blocks
+
+Code blocks are formatted like this:
+
+```sh
+# This is a comment
+echo "Hello, world!"
+```
+
+You can copy and paste these blocks directly into your terminal by
+clicking the clipboard icon in the top right corner of the block.
+
+> [!INFO]
+> Checkout this [gist](https://gist.github.com/rdnajac)
+> to learn how the clipboard icon works.
+
 ## Getting started
 
 If you're new to computational bioinformatics, we recommend starting with the AWS and
