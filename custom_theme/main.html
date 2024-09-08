@@ -1,4 +1,14 @@
 <!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
-{% extends "base.html" %} {% block content %} {{ super() }}
-<small><i>Updated: {{ page.meta.file_date }}</i></small>
+
+{% extends "base.html" %}
+{% block content %}
+{{ super() }}
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on {{ page.meta.file_date }}.
+  </i></small >
 {% endblock %}

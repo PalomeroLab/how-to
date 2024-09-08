@@ -4,7 +4,8 @@ repo_url: https://github.com/palomeroLab/how-to/
 edit_uri: blob/main/docs/
 site_description: A collection of how-to guides for the Palomero Lab
 site_author: Ryan D. Najac
-copyright: Copyright &copy; 2024 <a href="https://rdnajac.tech/">Ryan D. Najac</a>
+copyright: <a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a>
+
 
 theme:
   name: readthedocs

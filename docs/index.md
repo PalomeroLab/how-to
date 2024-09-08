@@ -1,54 +1,31 @@
-# How-To
+# How do I science?
 
-![logo](img/CUIMC_Horizontal_Blue.png)
-
-Welcome to the Palomero Lab How-To guide!
-This is a collection of instructions and tips for common bioinformatics tasks,
-focused on Linux-based workflows and AWS cloud computing.
-
-## What's in this guide?
-
+Welcome to the [Palomero Lab](https://www.palomerolab.org/) How-To guide!
 This guide covers a range of topics including:
 
-- Setting up and using AWS services
 - Running bioinformatics tools and pipelines
 - Managing data with command-line interfaces
 - Writing effective scripts for automation
+- Setting up and using AWS services for high-performance computing
 - Using Rstudio and Jupyter notebooks for data analysis
 
-> [!NOTE]
-> These files are written using [GitHub Flavored Markdown \(GFM\)](https://github.github.com/gfm/),
-> a superset of the [original](https://daringfireball.net/projects/markdown/syntax)
-> lightweight markup language with plain text formatting syntax.
-> GFM gives us additional features (like tables, footnotes, and alerts
-> like this) while maintaining readability in plain text.
+Read more about [this guide](about.md) or visit the project's original [GitHub
+repository](https://github.com/rdnajac/cbmf).
 
 ## How to use this guide
 
-- Browse the sidebar to find the topic you're interested in
-- Use the search function to look for specific terms or tools
-- Each page contains step-by-step instructions and helpful tips
-- Code blocks can be copied and pasted directly into your terminal
-
-### Code blocks
-
-Code blocks are formatted like this:
+Browse the navigation bar, use the search function,
+or click through the pages to find the information you need.
+Source code will appear `like this` if it is written inline
+or in a code block like the one this:
 
 ```sh
-# This is a comment
+# Click the clipboard icon to copy me!
 echo "Hello, world!"
 ```
 
-You can copy and paste these blocks directly into your terminal by
-clicking the clipboard icon in the top right corner of the block.
-
-> [!TIP]
-> Checkout this [gist](https://gist.github.com/rdnajac)
-> to learn how the clipboard icon works.
-
-## Contributing
-
-Click on the "Edit this page" link at the bottom of any page to suggest changes
-or additions. You can also fork this repository and submit a pull request.
+> If you get `zsh: command not found: #` when you try to run a copied command,
+> run `setopt interactivecomments` first. Read about why
+> [here](https://stackoverflow.com/a/11873793/26469286).
 
 Happy computing!
