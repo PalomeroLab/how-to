@@ -98,3 +98,57 @@ sudo visudo
 # Add to run any command without a password
 username ALL=(ALL) NOPASSWD: ALL
 ```
+
+### ssh
+
+Make sure you have `openssh-server` installed:
+
+```sh
+sudo apt install openssh-server
+```
+
+#### Connect to a remote server
+
+```sh
+ssh username@hostname
+```
+
+#### Copy files to/from a remote server
+
+```sh
+scp username@hostname:/path/to/remote/file /path/to/local/file
+scp /path/to/local/file username@hostname:/path/to/remote/file
+```
+
+#### No password ssh
+
+First, generate a new SSH key pair:
+
+```sh
+ssh-keygen -t rsa -b 4096 -C "a comment"
+```
+
+The `-t` option specifies the type of key to create (in this case, RSA).
+The `-b` option specifies the number of bits in the key (in this case, 4096).
+The `-C` option specifies a comment. This is optional.
+
+Next, copy the public key to the remote server:
+
+```sh
+ssh-copy-id -i <identity_file> username@hostname
+```
+
+and modify the `~/.ssh/config` file:
+
+```sh
+Host hostname
+  User username
+  HostName hostname
+  IdentityFile ~/.ssh/identity_file
+```
+
+Now you can log in without a password:
+
+```sh
+ssh username@hostname
+```
