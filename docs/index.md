@@ -26,7 +26,7 @@ echo "Hello, world!"
 
 > [!TIP]
 > If you get `zsh: command not found: #` when you try to run a copied command,
-> run `setopt interactivecomments` first. Read about why
+> run `setopt interactivecomments` first. Read about why this happens
 > [here](https://stackoverflow.com/a/11873793/26469286).
 
 ## Contributing

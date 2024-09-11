@@ -1,4 +1,4 @@
-# Illumina
+# Illumina Sequencing
 
 If you used a core facility, Azenta, or another commercial service for
 sequencing, they will send link to directly download the de-multiplexed

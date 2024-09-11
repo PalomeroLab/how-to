@@ -13,4 +13,3 @@ is a collaborative effort and what good does documentation do if it's not
 These files are written using [GitHub Flavored Markdown \(GFM\)](https://github.github.com/gfm/),
 a superset of the [original](https://daringfireball.net/projects/markdown/syntax)
 lightweight markup language with plain text formatting syntax.
-Try editing this page by clicking on the link in the top right corner!
