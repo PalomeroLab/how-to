@@ -1,8 +1,6 @@
-# Amazon Web Services (AWS) CLI Setup and Usage
+# Amazon Web Services
 
 This guide covers setting up and using the AWS Command Line Interface (CLI) for interacting with various AWS services.
-
-## AWS Services Quick Links
 
 - [S3 (Simple Storage Service)](s3.md)
 - [EC2 (Elastic Compute Cloud)](ec2.md)
@@ -48,6 +46,7 @@ aws configure
 ```
 
 You'll be prompted for:
+
 - AWS Access Key ID
 - AWS Secret Access Key
 - Default region name (e.g., us-east-1)
@@ -105,12 +104,10 @@ todays-instances = ec2 describe-instances --query 'Reservations[].Instances[?Lau
 
 Use with: `aws todays-instances`
 
-## Further Reading
+## References
 
 - [AWS CLI Command Reference](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html)
 - [S3 CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/s3/index.html)
 - [EC2 CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/ec2/index.html)
 - [IAM CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/iam/index.html)
 - [Glacier CLI Reference](https://docs.aws.amazon.com/cli/latest/reference/glacier/index.html)
-
-Remember to keep your AWS CLI updated and regularly review the AWS documentation for the latest features and best practices.

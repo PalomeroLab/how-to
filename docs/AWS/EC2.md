@@ -1,4 +1,4 @@
-# EC2 (Elastic Compute Cloud)
+# EC2
 
 EC2 instances are virtual servers that you can provision and manage in the AWS cloud. They offer flexible compute capacity, billed by the hour or second, with a variety of instance types to suit different workloads.
 

@@ -1,10 +1,11 @@
-# IAM (Identity and Access Management)
+# IAM
 
 Use IAM to securely manage access to AWS services and resources. This guide covers users, groups, policies, and best practices.
 
 ## Users
 
-To create a user: 
+To create a user:
+
 1. Navigate to `IAM` in the AWS Management Console
 2. Select `Users` from the left sidebar
 3. Click `Create user`
@@ -13,6 +14,7 @@ To create a user:
 > [!CAUTION]
 > Providing user access to the AWS Management Console is a security risk.
 > If you must provide access:
+>
 > 1. Create an auto-generated password
 > 2. Require the user to change it upon first login
 > 3. Enable Multi-Factor Authentication (MFA)
@@ -112,4 +114,4 @@ Example CloudWatch alarm for failed console sign-in attempts:
 }
 ```
 
-This enhanced document provides more detailed information, examples, and best practices for managing IAM effectively and securely.
+For more information, refer to the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html).
