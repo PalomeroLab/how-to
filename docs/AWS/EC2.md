@@ -1,98 +1,112 @@
-# EC2
+# EC2 (Elastic Compute Cloud)
 
-EC2 (Elastic Compute Cloud) instances are virtual servers that you can spin up
-and down as needed. They are billed by the hour and you can choose from a
-variety of instance [types](https://aws.amazon.com/ec2/instance-types/).
+EC2 instances are virtual servers that you can provision and manage in the AWS cloud. They offer flexible compute capacity, billed by the hour or second, with a variety of instance types to suit different workloads.
 
-## `ssh`
+## Instance Types
 
-If there is an ssh key associated with the instance, make sure you have a copy of the
-private key with permissions set to `400`:
+EC2 provides a wide range of [instance types](https://aws.amazon.com/ec2/instance-types/) optimized for various use cases:
+
+- General Purpose (e.g., t3, m5)
+- Compute Optimized (e.g., c5)
+- Memory Optimized (e.g., r5)
+- Accelerated Computing (e.g., p3, g4)
+- Storage Optimized (e.g., i3, d2)
+
+Choose the instance type based on your application's requirements for CPU, memory, storage, and network performance.
+
+## Connecting to EC2 Instances
+
+### SSH
+
+To connect via SSH, ensure you have the private key associated with the instance:
 
 ```sh
 chmod 400 /path/to/private-key.pem
+ssh -i /path/to/private-key.pem ec2-user@ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com
 ```
 
-## Connect to EC2 instance through serial console
+### EC2 Serial Console
 
-Go to the [EC2 Console](https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#Instances:instanceState=running)
-and select the instance you want to connect to.
-Click on the `Connect`, then `EC2 serial console` tab, and `Connect` again.
+For instances that support it (typically those running on AWS Nitro System):
+
+1. Go to the [EC2 Console](https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#Instances:instanceState=running)
+2. Select the instance
+3. Click `Connect` > `EC2 Serial Console` > `Connect`
 
 > [!NOTE]
-> Make sure the type of instance is supported by the serial console.
-> Look for ones that run on AWS Nitro System.
+> If no login prompt appears, try pressing `Enter`.
 
-Once connected, you can interact with the instance as if you were using a terminal.
+## CLI Tools for EC2 Interaction
 
-If a login prompt does not appear, try pressing `Enter`.
+### SSH Config
 
-## CLI Tools for interacting with EC2 instances
+Optimize your SSH connections by editing `~/.ssh/config`:
 
-### `ssh`
-
-edit `~/.ssh/config`
-
-- add the location of the private key file so you don't have to specify it with `-i` each time you connect
-- add the `User` and `Hostname` fields so you don't have to specify them each time
-
-```sh
-# example ~/.ssh/config
-Host aws
-    Hostname ec2-1-234-5-6.compute-1.amazonaws.com
-    User ubuntu
-    IdentityFile ~/.ssh/aws.pem
+```
+Host aws-instance
+    Hostname ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com
+    User ec2-user
+    IdentityFile ~/.ssh/aws-key.pem
 ```
 
-### `scp`
+Now connect with: `ssh aws-instance`
 
-- "secure copy" files between computers using `ssh`
-- this means the config from `~/.ssh/config` is used
+### SCP (Secure Copy)
 
-```sh
-# copy file to home dir of remote aws instance
-scp localfile.txt aws:~
-
-# copy remote file to pwd
-scp aws:~/remotefile.txt .
-```
-
-### `rsync`
-
-- useful for keeping all files in a directory up-to-date
+Transfer files to/from your EC2 instance:
 
 ```sh
-# copy all files in a directory to a remote server
-rsync -avz --progress /path/to/local/dir/ aws:/path/to/remote/dir/
+# Local to EC2
+scp localfile.txt aws-instance:~/
+
+# EC2 to Local
+scp aws-instance:~/remotefile.txt .
 ```
 
-### `tmux`
+### Rsync
 
-Weird stuff can happen with "nested" sessions over `ssh`.
-If you want to attach to a tmux session on a remote server,
-you need to use the `-t` flag since `tmux` is not a login shell.
+Synchronize directories:
 
 ```sh
-ssh aws             # works
-ssh aws tmux a      # huh?
-ssh aws -t tmux a   # ok
+rsync -avz --progress /local/dir/ aws-instance:/remote/dir/
 ```
 
-### `vim`
+### Tmux
 
-Once you have ssh configured, you can use vim to edit files remotely thanks to
-the `netrw` plugin that comes shipped with `vim`.
+For persistent sessions, use tmux. Connect with:
 
 ```sh
-vim scp://aws/remote/path/to/file
+ssh -t aws-instance tmux attach
 ```
 
-Copy current vim buffer to remote server
+### Vim
+
+Edit remote files directly:
+
+```sh
+vim scp://aws-instance//path/to/remote/file
+```
+
+Copy current buffer to EC2:
 
 ```vim
-:!scp % aws:~/path/to/remote/file
+:!scp % aws-instance:~/path/to/remote/file
 ```
 
-Inside vim, you can use the `:Explore` command to browse the remote server.
-Read more about it with `:h netrw` from inside vim.
+## Best Practices
 
+1. Use appropriate instance types for your workload
+2. Implement proper security groups and network ACLs
+3. Use Elastic IPs for static public IP addresses
+4. Utilize EC2 Auto Scaling for high availability and fault tolerance
+5. Regularly patch and update your EC2 instances
+6. Use Amazon CloudWatch for monitoring and alerting
+
+## Advanced Features
+
+- **EC2 Instance Connect**: Browser-based SSH access without the need for a key pair
+- **Spot Instances**: Save up to 90% on EC2 costs for interruptible workloads
+- **Elastic Fabric Adapter**: High-performance networking for HPC and ML applications
+- **Elastic Inference**: Add GPU-powered inference acceleration to EC2 instances
+
+For more information, refer to the [EC2 User Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html).
