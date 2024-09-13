@@ -1,5 +1,11 @@
 # Bash scripting
 
+[Google](https://google.github.io/styleguide/shellguide.html) recommends using `bash` for all executable shell scripts:
+
+> Restricting all executable shell scripts to `bash` gives us a consistent shell language that's installed on all our machines. In particular, this means there is generally no need to strive for POSIX-compatibility or otherwise avoid "bashisms".
+
+For practical examples and command-line usage, see the [CLI guide](cli.md).
+
 ## Resources
 
 - `man bash`

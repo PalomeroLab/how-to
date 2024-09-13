@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
 
+# This script defines custom functions and macros for use in the MkDocs site
+
 
 def get_file_date(page):
     """Returns the last modification date of the given page's source file."""
@@ -11,7 +13,7 @@ def get_file_date(page):
 
 
 def define_env(env):
-    """This is the hook for defining variables, macros and filtersa."""
+    """Hook for defining variables, macros and filters in the MkDocs environment."""
 
     @env.macro
     def get_file_date_macro(page):
@@ -21,4 +23,5 @@ def define_env(env):
 
 def on_post_page_macros(env):
     """Actions after macro interpretation and markdown generation."""
+    # Add the file_date to the page metadata for use in templates
     env.page.meta["file_date"] = get_file_date(env.page)
