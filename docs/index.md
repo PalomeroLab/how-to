@@ -12,6 +12,10 @@ This guide covers a range of topics including:
 Read more about [this guide](about.md) or visit the project's original [GitHub
 repository](https://github.com/rdnajac/cbmf).
 
+> [!IMPORTANT]
+> Lab members [click here](private/index.md) to access the private section of
+> the guide.
+
 ## How to use this guide
 
 Browse the navigation bar, use the search function,
@@ -24,10 +28,9 @@ or in a code block like the one this:
 echo "Hello, world!"
 ```
 
-> [!TIP]
-> If you get `zsh: command not found: #` when you try to run a copied command,
-> run `setopt interactivecomments` first. Read about why this happens
-> [here](https://stackoverflow.com/a/11873793/26469286).
+If you get a warning `$ zsh: command not found: #`, you may need to
+run `setopt interactivecomments` first. Read about why this happens
+[here](https://stackoverflow.com/a/11873793/26469286).
 
 ## Contributing
 
