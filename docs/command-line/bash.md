@@ -6,6 +6,40 @@
 
 For practical examples and command-line usage, see the [CLI guide](cli.md).
 
+## Shebang
+
+The shebang is the first line of a script and tells the system which interpreter
+to use to run the script. For `bash` scripts, use `#!/bin/bash`:
+
+```sh
+#!/bin/bash
+# After the shebang, add comments to describe the script
+echo "Hello, world!"
+```
+
+### Executing scripts
+
+To execute a script from the command line, make it executable:
+
+```sh
+chmod +x /path/to/script.sh
+```
+
+> [!NOTE]
+> If you use the command `ls -l`, you'll see an `x` in the permissions column
+> for the script. More about that [here](https://www.geeksforgeeks.org/how-to-set-file-permissions-in-linux/).
+
+Then run it:
+
+```s
+./path/to/script.sh
+```
+> [!TIP]
+> The `./` prefix is required to run scripts in the current directory.
+
+Try saving the "Hello, world!" script above to a file and running it
+after making it executable. (The `.sh` extension is optional.)
+
 ## Resources
 
 - `man bash`
