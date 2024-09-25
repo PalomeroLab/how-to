@@ -34,6 +34,7 @@ Then run it:
 ```s
 ./path/to/script.sh
 ```
+
 > [!TIP]
 > The `./` prefix is required to run scripts in the current directory.
 
@@ -125,7 +126,7 @@ in bash
 
 A here document allows you to pass multiple lines of input to a command without storing it in a file:
 
-```
+```sh
 cat << EOF
 This is a here document.
 It can be used to pass multiple lines of input to a command.
@@ -134,13 +135,13 @@ EOF
 
 ### More useful commands
 
-| Command                               | Description                                                                   |
-| ------------------------------------- | ----------------------------------------------------------------------------- |
-| `ssh user@host 'bash -s' < script.sh` | Run a local script on a remote machine.                                       |
-| `md5sum ./*.fastq.gz > md5sums.txt`   | Generate a file with the MD5 checksums of all files in the current directory. |
-| `md5sum -c md5sums.txt`               | Check files against the MD5 checksums in a file.                              |
-| `du -ha --max-depth=1`                | Check the total size of each folder in the current directory.                 |
-| `free -h`                             | Check current memory usage.                                                   |
+| Command                             | Description                                                                   |
+| ----------------------------------- | ----------------------------------------------------------------------------- |
+| ssh user@host 'bash -s' < script.sh | Run a local script on a remote machine.                                       |
+| md5sum ./\*.fastq.gz > md5sums.txt  | Generate a file with the MD5 checksums of all files in the current directory. |
+| md5sum -c md5sums.txt               | Check files against the MD5 checksums in a file.                              |
+| du -ha --max-depth=1                | Check the total size of each folder in the current directory.                 |
+| free -h                             | Check current memory usage.                                                   |
 
 ## Loop across files of the same extension
 
@@ -196,6 +197,4 @@ myfunc() {
 > [!TIP]
 > To define single-line functions, add a semicolon before the closing brace:
 >
-> ```sh
-> myfunc() { echo "Hello, world!"; }
-> ```
+> `myfunc() { echo "Hello, world!"; }`
