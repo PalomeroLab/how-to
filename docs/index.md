@@ -12,12 +12,17 @@ This guide covers a range of topics including:
 Read more about [this guide](about.md) or visit the project's original [GitHub
 repository](https://github.com/rdnajac/cbmf).
 
+> [!NOTE]
+> Lab members [click here](private/index.md) to access the private section of
+> the guide.
+
 ## How to use this guide
 
 Browse the navigation bar, use the search function,
 or click through the pages to find the information you need.
-Source code will appear `like this` if it is written inline
-or in a code block like the one this:
+
+Shell commands and code snippets will be formatted like `this`
+when written inline or in a code block like the one below.
 
 ```sh
 # Click the clipboard icon to copy me!
@@ -28,18 +33,18 @@ echo "Hello, world!"
 > If you get this following error while using `zsh`:
 >
 > ```sh
-> $ zsh: command not found: 
+> $ zsh: command not found:
 > ```
 >
 > Then you need to run the following command to tell `zsh` to ignore comments:
-> 
+>
 > ```sh
 > setopt interactivecomments
-> ``` 
+> ```
 >
 > To make this change permanent, add the command to your `.zshrc` file
 > by either editing it with a text editor or running the following command:
-> 
+>
 > ```sh
 > echo "setopt interactivecomments" >> ~/.zshrc
 > ```
