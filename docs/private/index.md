@@ -1,7 +1,7 @@
 # Private
 
 > [!CAUTION]
-> Thise section is intended for Palomero Lab members
+> This section is intended for Palomero Lab members
 > and the content may not be useful to the general public.
 
 ## Contents
