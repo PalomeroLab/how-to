@@ -24,10 +24,25 @@ or in a code block like the one this:
 echo "Hello, world!"
 ```
 
-> [!TIP]
-> If you get `zsh: command not found: #` when you try to run a copied command,
-> run `setopt interactivecomments` first. Read about why this happens
-> [here](https://stackoverflow.com/a/11873793/26469286).
+> [!IMPORTANT]
+> If you get this following error while using `zsh`:
+>
+> ```sh
+> $ zsh: command not found: 
+> ```
+>
+> Then you need to run the following command to tell `zsh` to ignore comments:
+> 
+> ```sh
+> setopt interactivecomments
+> ``` 
+>
+> To make this change permanent, add the command to your `.zshrc` file
+> by either editing it with a text editor or running the following command:
+> 
+> ```sh
+> echo "setopt interactivecomments" >> ~/.zshrc
+> ```
 
 ## Contributing
 
