@@ -33,7 +33,7 @@ echo "Hello, world!"
 > If you get this following error while using `zsh`:
 >
 > ```sh
-> $ zsh: command not found:
+> $ zsh: command not found: #
 > ```
 >
 > Then you need to run the following command to tell `zsh` to ignore comments:
