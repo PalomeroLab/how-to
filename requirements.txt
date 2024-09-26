@@ -1,3 +1,4 @@
 mkdocs
 mkdocs-macros-plugin
 markdown-gfm-admonition
+pymdown-extensions
