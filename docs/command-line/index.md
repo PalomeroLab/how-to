@@ -22,7 +22,9 @@ shell. Checkout the [quick reference](quick-reference.md) for common commands.
 
 ## Terminal
 
-The "terminal" is the interface between you and the shell. It's also referred to as the "command line" or the "console". Various programs can serve as a terminal, such as:
+The "terminal" is the interface between you and the shell.
+It's also referred to as the "command line" or the "console".
+Various programs can serve as a terminal, such as:
 
 - `iTerm` on macOS
 - `cmd` on Windows
@@ -38,9 +40,16 @@ include:
 - `zsh` (the default on macOS)
 
 > [!TIP]
-> For maintainability and portability, it's recommended to write scripts in `bash` and be explicit about it. For an interesting discussion on this topic, check out this [Stack Overflow post](https://unix.stackexchange.com/questions/697052/why-should-i-care-about-posix-if-im-writing-bash-scripts).
-> For more information on `bash`, see the [Bash Guide](bash.md).
-> section.
+> For maintainability and portability, it's recommended to write scripts in `bash` and be explicit about it.
+> For an interesting discussion on this topic, check out this
+> [Stack Overflow post](https://unix.stackexchange.com/questions/697052/why-should-i-care-about-posix-if-im-writing-bash-scripts).
 
 Read through the [bash guide](bash.md) for more information on the writing and
 executing shell scripts.
+
+## Windows Subsystem for Linux (WSL)
+
+Windows users can run a Linux distribution on Windows using WSL. This allows you
+to run Linux command-line tools and utilities directly on Windows without
+needing a virtual machine or dual-boot setup. If you want to use WSL, follow the
+[installation instructions](https://docs.microsoft.com/en-us/windows/wsl/install).

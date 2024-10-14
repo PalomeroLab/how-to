@@ -15,9 +15,13 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip && sudo ./aws/install && rm -rf ./awscliv2.zip ./aws
 ```
 
-For other operating systems, refer to the [official installation guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+For other operating systems, refer to the
+[official installation guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
 ## Shell Completion Setup
+
+Set up shell completion for the AWS CLI so you can use tab to autocomplete
+commands and options.
 
 ### Bash
 
@@ -36,6 +40,11 @@ autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 complete -C '/usr/local/bin/aws_completer' aws
 ```
+
+> [!IMPORTANT]
+> If you installed the AWS CLI in a different location, update the path
+> accordingly. For example, if you installed it using homebrew, the path
+> might be `/opt/homebrew/bin/aws_completer`.
 
 ## AWS CLI Configuration
 
