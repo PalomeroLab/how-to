@@ -1,6 +1,12 @@
 # Linux
 
-Linux is a family of open-source Unix-like operating systems based on the Linux kernel. It's typically packaged in a distribution, which includes the Linux kernel along with a set of software tools and utilities. There are many different distributions of Linux, such as Ubuntu, Fedora, Red Hat, and CentOS.
+Linux is a family of open-source Unix-like operating systems based on the Linux kernel.
+It's typically packaged in a distribution, which includes the Linux kernel along with
+a set of software tools and utilities. There are many different distributions of
+Linux, such as Ubuntu, Fedora, Red Hat, and CentOS.
+
+In this guide, the "command line" refers to the interface between you and the
+shell. Checkout the [quick reference](quick-reference.md) for common commands.
 
 ## Concepts
 
@@ -11,7 +17,8 @@ Linux is a family of open-source Unix-like operating systems based on the Linux 
 - **Shell**: The program that interprets and executes commands.
 
 > [!IMPORTANT]
-> When creating an instance on AWS, you're setting up a virtual machine that runs an operating system of your choice. For maximum compatibility with our software, use `Ubuntu 22.04 LTS` (on 64-bit x86).
+> When creating an instance on AWS, you're setting up a virtual machine that runs an operating system of your choice.
+> For maximum compatibility with our software, use `Ubuntu 22.04 LTS` (on 64-bit x86).
 
 ## Terminal
 
@@ -35,4 +42,5 @@ include:
 > For more information on `bash`, see the [Bash Guide](bash.md).
 > section.
 
-## Bash Scripting
+Read through the [bash guide](bash.md) for more information on the writing and
+executing shell scripts.
