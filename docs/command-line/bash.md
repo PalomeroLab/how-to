@@ -1,12 +1,16 @@
 # Bash scripting
 
-[Google](https://google.github.io/styleguide/shellguide.html) recommends using `bash` for all executable shell scripts:
+[Google](https://google.github.io/styleguide/shellguide.html)
+recommends using `bash` for all executable shell scripts:
 
-> Restricting all executable shell scripts to `bash` gives us a consistent shell language that's installed on all our machines. In particular, this means there is generally no need to strive for POSIX-compatibility or otherwise avoid "bashisms".
+> Restricting all executable shell scripts to `bash` gives us a consistent
+> shell language that's installed on all our machines. In particular, this
+> means there is generally no need to strive for POSIX-compatibility or
+> otherwise avoid "bashisms".
 
 For practical examples and command-line usage, see the [CLI guide](cli.md).
 
-## Shebang
+## Start with a shebang
 
 The shebang is the first line of a script and tells the system which interpreter
 to use to run the script. For `bash` scripts, use `#!/bin/bash`:
@@ -17,9 +21,14 @@ to use to run the script. For `bash` scripts, use `#!/bin/bash`:
 echo "Hello, world!"
 ```
 
+You may see other shebangs like `#!/bin/sh` or `#!/usr/bin/env bash`. The former
+uses the system's default shell, which may not be `bash`. The latter is more
+portable as it can find `bash` in different locations.
+
 ### Executing scripts
 
-To execute a script from the command line, make it executable:
+To execute a script from the command line, you can manually invoke the
+interpreter with `bash <filename>` or you can make the file executable:
 
 ```sh
 chmod +x /path/to/script.sh
@@ -31,7 +40,7 @@ chmod +x /path/to/script.sh
 
 Then run it:
 
-```s
+```sh
 ./path/to/script.sh
 ```
 
@@ -58,7 +67,10 @@ For a quick reference, check out [DevHints.io](https://devhints.io/bash).
 
 ## Special Variables and Commands
 
-Special variables and commands can be very useful in `bash` scripts, particularly for interacting with command history:
+Special variables and commands can be very useful in `bash` scripts,
+particularly for interacting with command history:
+
+<!-- markdownlint-disable MD013 -->
 
 | Command         | Description                                                  |
 | --------------- | ------------------------------------------------------------ |
@@ -89,8 +101,8 @@ $ sudo !!
 You performed a dry run with `echo` and want to run the command for real:
 
 ```
-$ echo sudo apt-get install -y vim
-$ !:2-*
+echo sudo apt-get install -y vim
+!:2-*
 ```
 
 ## Update and Upgrade Everything on Ubuntu
@@ -127,7 +139,7 @@ in bash
 A here document allows you to pass multiple lines of input to a command without storing it in a file:
 
 ```sh
-cat << EOF
+cat <<EOF
 This is a here document.
 It can be used to pass multiple lines of input to a command.
 EOF
@@ -148,8 +160,8 @@ EOF
 Don't use `ls` or `find`. Instead, use a glob pattern:
 
 ```sh
-for file in ./*.bam; do  # Loop across all .bam files in the current directory
-    command "$file"      # Quote the variable to handle spaces in filenames
+for file in ./*.bam; do # Loop across all .bam files in the current directory
+ command "$file"        # Quote the variable to handle spaces in filenames
 done
 
 # single-line loop
@@ -160,12 +172,12 @@ for file in ./*.bam; do command "$file"; done
 
 ## Safely change directories
 
-Don't use `cd` without checking if it was successful.
+Don't `cd` without checking if it was successful!
 You might end up executing commands in the wrong directory.
 
 ```sh
-cd /path/to/some/dir || exit  # Exit if the directory doesn't exist or is inaccessible
-rm -rf *                      # This could be very bad if the cd failed
+cd /path/to/some/dir || exit # Exit if the directory doesn't exist or is inaccessible
+rm -rf *                     # This could be very bad if the cd failed
 ```
 
 [source](https://mywiki.wooledge.org/BashPitfalls#cd_.2Ffoo.3B_bar)
@@ -178,17 +190,17 @@ Just use the function name followed by parentheses. We'll know it's a function.
 ```sh
 # bad
 function myfunc {
-    echo "Hello, world!"
+ echo "Hello, world!"
 }
 
 # very bad
 function myfunc() {
-    echo "Hello, world!"
+ echo "Hello, world!"
 }
 
 # good
 myfunc() {
-    echo "Hello, world!"
+ echo "Hello, world!"
 }
 ```
 
