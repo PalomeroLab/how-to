@@ -34,7 +34,7 @@ Example usage:
 
 ```sh
 featureCounts -T "$NUM_THREADS" --verbose -t exon -g gene_id --countReadPairs \
-		-a "$REF_GTF" -p -P -C -B -o "${OUT_DIR}/${OUT_PREFIX}.tsv" ./*.bam
+  -a "$REF_GTF" -p -P -C -B -o "${OUT_DIR}/${OUT_PREFIX}.tsv" ./*.bam
 ```
 
 ### Output
@@ -47,10 +47,76 @@ Feature counts also provide a summary of the number of reads that were
 assigned to features, as well as the number of reads that were not assigned
 to any feature.
 
-## Downstream Analysis using R
+### Downstream Analysis using R
 
 Export the results from `featureCounts` to R for further analysis, such as
 differential expression analysis using packages like DESeq2 or edgeR.
+
+## Normalization
+
+> [!CAUTION]
+> Without between sample normalization NONE of these units are comparable across experiments.
+> This is a result of RNA-Seq being a relative measurement, not an absolute one.
+> [Source](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/).
+
+**Counts** usually refers to the number of reads that align to a particular feature ($X_i).
+These numbers are heavily dependent on two things:
+
+- The amount of fragments you sequenced (this is related to relative abundances).
+- The length of the feature, or more appropriately, the _effective length_.
+
+Effective length refers to the number of possible start sites a feature could
+have generated a fragment of that particular length.
+
+Since counts are NOT scaled by the length of the feature, all units in this
+category are not comparable within a sample without adjusting for the feature
+length. This means you can’t sum the counts over a set of features to get the
+expression of that set (e.g. you can’t sum isoform counts to get gene counts).
+
+### TPM (Transcripts Per Million)
+
+Transcripts per million (TPM) is a measurement of the proportion of transcripts
+in your pool of RNA.
+
+### RPKM/FPKM
+
+Reads per kilobase of exon per million reads mapped (RPKM), or the more generic
+FPKM (substitute reads with fragments) are essentially the same thing.
+
+> [!NOTE]
+> FPKM is not $2 *$ RPKM if you have paired-end reads. FPKM $==$ RPKM if you have single-end reads,
+> and saying RPKM when you have paired-end reads is incorrect.
+
+<!-- TODO: add formulae -->
+
+### Code example
+
+```R
+countToTpm <- function(counts, effLen)
+{
+    rate <- log(counts) - log(effLen)
+    denom <- log(sum(exp(rate)))
+    exp(rate - denom + log(1e6))
+}
+
+countToFpkm <- function(counts, effLen)
+{
+    N <- sum(counts)
+    exp( log(counts) + log(1e9) - log(effLen) - log(N) )
+}
+
+fpkmToTpm <- function(fpkm)
+{
+    exp(log(fpkm) - log(sum(fpkm)) + log(1e6))
+}
+
+countToEffCounts <- function(counts, len, effLen)
+{
+    counts * (len / effLen)
+}
+```
+
+## R Packages
 
 ### DESeq2
 

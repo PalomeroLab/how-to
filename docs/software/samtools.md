@@ -1,18 +1,155 @@
 # Samtools
 
-[Samtools](http://www.htslib.org/doc/samtools.html) is a suite of programs for manipulating high-throughput sequencing data. It's essential for many bioinformatics workflows, particularly in processing and analyzing DNA sequencing data.
-
-The suite includes:
+[Samtools](http://www.htslib.org/doc/samtools.html) is a suite of programs for
+manipulating high-throughput sequencing data consisting of:
 
 - [Samtools](https://github.com/samtools/samtools): For handling SAM/BAM/CRAM formats
-- [BCFtools](https://github.com/samtools/bcftools): For variant calling and manipulating VCF/BCF files
-- [HTSlib](https://github.com/samtools/htslib): A C library underlying samtools and bcftools
+- [BCFtools](https://github.com/samtools/bcftools): Variant calling (VCF/BCF formats)
+- [HTSlib](https://github.com/samtools/htslib): The underlying C library
 
-## Key Samtools Commands
+> [!TIP]
+> Read the official samtools documentation [here](http://www.htslib.org/doc/samtools.html)
 
-### Viewing and Converting Files
+## `samtools` Commands
 
-`samtools view`: Convert between formats and filter alignments
+### Indexing
+
+| Command | Description                       | Syntax |
+| ------- | --------------------------------- | ------ |
+| `dict`  | create a sequence dictionary file |        |
+| `faidx` | index/extract FASTA               |        |
+| `fqidx` | index/extract FASTQ               |        |
+| `index` | index alignment                   |        |
+
+### Editing
+
+| Command               | Description                               | Syntax                                       |
+| --------------------- | ----------------------------------------- | -------------------------------------------- |
+| `calmd`               | recalculate MD/NM tags and '=' bases      |                                              |
+| `fixmate`             | fix mate information                      |                                              |
+| `reheader`            | replace BAM header                        |                                              |
+| `targetcut`           | cut fosmid regions (for fosmid pool only) |                                              |
+| `addreplacerg`        | adds or replaces RG tags                  |                                              |
+| [`markdup`](#markdup) | mark duplicates                           | `samtools markdup in.algnsorted.bam out.bam` |
+| `ampliconclip`        | clip oligos from the end of reads         |                                              |
+
+#### Handling Duplicate Reads <a name="markdup"></a>
+
+Let's assume we already have sorted, marked duplicates, and indexed BAM files.
+
+```sh
+for bamfile in ./*.bam; do
+# note that in this case, files are named like `DNMT3A_sorted_markdup.bam`
+    samtools markdup @$(nproc) -r -s $bamfile ${bamfile%markdup.bam}dedup.bam
+done
+```
+
+### File operations
+
+| Command      | Description                                       | Syntax |
+| ------------ | ------------------------------------------------- | ------ |
+| `collate`    | shuffle and group alignments by name              |        |
+| `cat`        | concatenate BAMs                                  |        |
+| `consensus`  | produce a consensus Pileup/FASTA/FASTQ            |        |
+| `merge`      | merge sorted alignments                           |        |
+| `mpileup`    | multi-way pileup                                  |        |
+| `sort`       | sort alignment file                               |        |
+| `split`      | splits a file by read group                       |        |
+| `quickcheck` | quickly check if SAM/BAM/CRAM file appears intact |        |
+| `fastq`      | converts a BAM to a FASTQ                         |        |
+| `fasta`      | converts a BAM to a FASTA                         |        |
+| `import`     | Converts FASTA or FASTQ files to SAM/BAM/CRAM     |        |
+| `reference`  | Generates a reference from aligned data           |        |
+| `reset`      | Reverts aligner changes in reads                  |        |
+
+#### Sorting and Indexing
+
+`samtools sort`: Sort alignments by leftmost coordinates
+
+Sort a BAM file:
+
+```sh
+samtools sort -o sorted_output.bam input.bam
+```
+
+Sort by read names (useful for some tools):
+
+```sh
+samtools sort -n -o name_sorted.bam input.bam
+```
+
+`samtools index`: Index a sorted BAM/CRAM file
+
+```sh
+samtools index sorted_output.bam
+```
+
+> [!TIP]
+> Always index your sorted BAM files.
+> Many tools require indexed BAMs for efficient access.
+
+#### Merging and Splitting
+
+`samtools merge`: Combine multiple BAM files
+
+```sh
+samtools merge output.bam input1.bam input2.bam input3.bam
+```
+
+Ensure all input BAMs are sorted in the same way (coordinate or query name).
+
+`samtools split`: Split a BAM file by read group
+
+```sh
+samtools split -u unassigned.bam -f '%*_%!.bam' input.bam
+```
+
+This is useful when you have multiple samples in one BAM file.
+
+### Statistics
+
+| Command         | Description                                | Syntax |
+| --------------- | ------------------------------------------ | ------ |
+| `bedcov`        | read depth per BED region                  |        |
+| `coverage`      | alignment depth and percent coverage       |        |
+| `depth`         | compute the depth                          |        |
+| `flagstat`      | simple stats                               |        |
+| `idxstats`      | BAM index stats                            |        |
+| `cram-size`     | list CRAM Content-ID and Data-Series sizes |        |
+| `phase`         | phase heterozygotes                        |        |
+| `stats`         | generate stats (former bamcheck)           |        |
+| `ampliconstats` | generate amplicon specific stats           |        |
+
+`samtools flagstat`: Generate simple alignment statistics
+
+```sh
+samtools flagstat input.bam
+```
+
+`samtools idxstats`: Report alignment summary statistics
+
+```sh
+samtools idxstats input.bam
+```
+
+`samtools stats`: Generate comprehensive statistics
+
+```sh
+samtools stats input.bam > stats.txt
+```
+
+Use `plot-bamstats` to visualize these statistics.
+
+### Viewing
+
+| Command   | Description                                     | Syntax |
+| --------- | ----------------------------------------------- | ------ |
+| `flags`   | explain BAM flags                               |        |
+| `head`    | header viewer                                   |        |
+| `tview`   | text alignment viewer                           |        |
+| `view`    | SAM<->BAM<->CRAM conversion                     |        |
+| `depad`   | convert padded BAM to unpadded BAM              |        |
+| `samples` | list the samples in a set of SAM/BAM/CRAM files |        |
 
 Convert SAM to BAM:
 
@@ -38,71 +175,8 @@ Filter for mapped reads and convert to SAM:
 samtools view -F 4 -h -o mapped_reads.sam input.bam
 ```
 
-The `-F 4` flag filters out unmapped reads. Use `samtools flags` to understand SAM flags.
-
-### Sorting and Indexing
-
-`samtools sort`: Sort alignments by leftmost coordinates
-
-Sort a BAM file:
-
-```sh
-samtools sort -o sorted_output.bam input.bam
-```
-
-Sort by read names (useful for some tools):
-
-```sh
-samtools sort -n -o name_sorted.bam input.bam
-```
-
-`samtools index`: Index a sorted BAM/CRAM file
-
-```sh
-samtools index sorted_output.bam
-```
-
-Always index your sorted BAM files. Many tools require indexed BAMs for efficient access.
-
-### Merging and Splitting
-
-`samtools merge`: Combine multiple BAM files
-
-```sh
-samtools merge output.bam input1.bam input2.bam input3.bam
-```
-
-Ensure all input BAMs are sorted in the same way (coordinate or query name).
-
-`samtools split`: Split a BAM file by read group
-
-```sh
-samtools split -u unassigned.bam -f '%*_%!.bam' input.bam
-```
-
-This is useful when you have multiple samples in one BAM file.
-
-### Statistics and Quality Control
-
-`samtools flagstat`: Generate simple alignment statistics
-
-```sh
-samtools flagstat input.bam
-```
-
-`samtools idxstats`: Report alignment summary statistics
-
-```sh
-samtools idxstats input.bam
-```
-
-`samtools stats`: Generate comprehensive statistics
-
-```sh
-samtools stats input.bam > stats.txt
-```
-
-Use `plot-bamstats` to visualize these statistics.
+> [!NOTE]
+> The `-F 4` flag filters out unmapped reads. Run `samtools flags` for more info.
 
 ## Working with CRAM Files
 
@@ -190,11 +264,4 @@ samtools idxstats marked_duplicates.bam > chromosome_stats.txt
 samtools view -C -T reference.fa -o final_output.cram marked_duplicates.bam
 ```
 
-## Troubleshooting
-
-- If you get "file not found" errors, check if your BAM files are where you expect and have read permissions.
-- For "invalid file format" errors, ensure your input files are properly formatted and not corrupted.
-- If samtools seems slow, check your disk I/O and consider using an SSD for temporary files.
-- For memory errors in `sort`, adjust the `-m` option to use less memory per thread.
-
-Remember to consult the [official samtools documentation](http://www.htslib.org/doc/samtools.html) for detailed information on each command and its options. Regular practice and experimentation will help you become proficient with these powerful tools.
+## Example Pipelines

@@ -100,3 +100,12 @@ Read the docs:
 
 - [bcl2fastq](https://support.illumina.com/content/dam/illumina-support/documents/documentation/software_documentation/bcl2fastq/bcl2fastq_letterbooklet_15038058brpmi.pdf)
 - [bclconvert](https://support-docs.illumina.com/SW/BCL_Convert_v4.0/Content/SW/BCLConvert/BCLConvert.htm)
+
+## Quality Control
+
+### FASTQC
+
+```sh
+mkdir -p ./fastqc
+for f in ./*.fastq.gz; do fastqc -o ./fastqc --noextract --memory 1024 "$f" & done; wait
+```

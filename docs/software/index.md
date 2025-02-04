@@ -1,6 +1,9 @@
 # Package Management
 
-Package management is a crucial aspect of software development and scientific computing. It involves organizing, installing, updating, and removing software packages efficiently. This guide covers various package management tools and best practices for different environments.
+Package management is a crucial aspect of software development and scientific
+computing. It involves organizing, installing, updating, and removing software
+packages efficiently. This guide covers various package management tools and
+best practices for different environments.
 
 ## Key Concepts
 
@@ -16,6 +19,22 @@ We cover several package management tools in this guide:
 1. [Conda and Micromamba](bioconda.md): For managing Python and other language packages, especially useful in bioinformatics.
 2. [R and renv](r.md#renv): For managing R packages and project environments.
 3. [Docker](docker.md): For containerizing applications and their dependencies.
+
+## `micromamba`
+
+### Quickstart
+
+Run and accept defaults:
+
+```sh
+"${SHELL}" <(curl -L micro.mamba.pm/install.sh)
+```
+
+Add the bioconda channel:
+
+```sh
+micromamba config add channels bioconda
+```
 
 ## Best Practices
 

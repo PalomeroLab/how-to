@@ -1,11 +1,11 @@
 # Linux and the Command Line
 
-Linux is a family of open-source Unix-like operating systems based on the Linux kernel.
-It's typically packaged in a distribution, which includes the Linux kernel along with
-a set of software tools and utilities. There are many different distributions of
-Linux, such as Ubuntu, Fedora, Red Hat, and CentOS.
+Linux is a family of open-source Unix-like operating systems based on the Linux
+kernel. It's typically packaged in a distribution, which includes the Linux
+kernel along with a set of software tools and utilities. There are many
+different distributions of Linux, such as Ubuntu, Fedora, Red Hat, and CentOS.
 
-Linux distrubitions all run a shell, which is a program that interprets and executes
+Linux distributions all run a shell, which is a program that interprets and executes
 programs. The "command line" refers to the interface between you and the shell.
 
 ## Concepts
@@ -93,13 +93,13 @@ sudo adduser username sudo
 
 #### Configure no-password `sudo`
 
-Open the sudoers file for editing:
+Open the `sudo`ers file for editing:
 
 ```sh
 sudo visudo
 ```
 
-> [!NOTE] > `visudo` is a special command that edits the sudoers file safely.
+> [!NOTE] > `visudo` is a special command that edits the `sudo`ers file safely.
 > If the environment variable `$EDITOR` is not set, it will use `vi`.
 
 Uncomment or add these lines:
@@ -152,7 +152,7 @@ ssh-copy-id -i <identity_file >username@hostname
 
 3. Modify the `~/.ssh/config` file:
 
-```sh
+```config
 Host hostname
 User username
 HostName hostname

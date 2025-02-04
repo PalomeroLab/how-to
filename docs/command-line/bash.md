@@ -1,4 +1,4 @@
-# Bash scripting
+# Bash Scripting
 
 [Google](https://google.github.io/styleguide/shellguide.html)
 recommends using `bash` for all executable shell scripts:
@@ -7,8 +7,6 @@ recommends using `bash` for all executable shell scripts:
 > shell language that's installed on all our machines. In particular, this
 > means there is generally no need to strive for POSIX-compatibility or
 > otherwise avoid "bashisms".
-
-For practical examples and command-line usage, see the [CLI guide](cli.md).
 
 ## Start with a shebang
 
@@ -100,7 +98,7 @@ $ sudo !!
 
 You performed a dry run with `echo` and want to run the command for real:
 
-```
+```sh
 echo sudo apt-get install -y vim
 !:2-*
 ```
@@ -109,24 +107,24 @@ echo sudo apt-get install -y vim
 
 To update and upgrade all packages:
 
-```
+```sh
 sudo apt-get update && sudo apt-get upgrade -y
 ```
 
 Alternatively:
 
-```
+```sh
 yes | sudo sh -c 'apt update && apt upgrade && apt dist-upgrade \
                  && apt autoremove && apt autoclean && apt clean'
 ```
 
 ## Special text inside `bash` scripts
 
-### Multiline Comments
+### Multi-line Comments
 
-To add multiline comments in `bash`, use the following syntax:
+To add multi-line comments in `bash`, use the following syntax:
 
-```
+```sh
 : '
 This is a
 very neat comment
@@ -160,7 +158,7 @@ EOF
 Don't use `ls` or `find`. Instead, use a glob pattern:
 
 ```sh
-for file in ./*.bam; do # Loop across all .bam files in the current directory
+for file in ./*.bam; do # Loop across all .bsudoam files in the current directory
  command "$file"        # Quote the variable to handle spaces in filenames
 done
 
