@@ -1,10 +1,11 @@
 # EC2
 
-EC2 instances are virtual servers that you can provision and manage in the AWS cloud. They offer flexible compute capacity, billed by the hour or second, with a variety of instance types to suit different workloads.
+EC2 instances are virtual servers that you can provision and manage in the cloud.
 
 ## Instance Types
 
-EC2 provides a wide range of [instance types](https://aws.amazon.com/ec2/instance-types/) optimized for various use cases:
+EC2 provides a wide range of [instance types](https://aws.amazon.com/ec2/instance-types/)
+optimized for various use cases:
 
 - General Purpose (e.g., t3, m5)
 - Compute Optimized (e.g., c5)
@@ -12,7 +13,7 @@ EC2 provides a wide range of [instance types](https://aws.amazon.com/ec2/instanc
 - Accelerated Computing (e.g., p3, g4)
 - Storage Optimized (e.g., i3, d2)
 
-Choose the instance type based on your application's requirements for CPU, memory, storage, and network performance.
+Choose the instance type based on your application's requirements.
 
 ## Connecting to EC2 Instances
 
@@ -93,20 +94,6 @@ Copy current buffer to EC2:
 :!scp % aws-instance:~/path/to/remote/file
 ```
 
-## Best Practices
+## Resources
 
-1. Use appropriate instance types for your workload
-2. Implement proper security groups and network ACLs
-3. Use Elastic IPs for static public IP addresses
-4. Utilize EC2 Auto Scaling for high availability and fault tolerance
-5. Regularly patch and update your EC2 instances
-6. Use Amazon CloudWatch for monitoring and alerting
-
-## Advanced Features
-
-- **EC2 Instance Connect**: Browser-based SSH access without the need for a key pair
-- **Spot Instances**: Save up to 90% on EC2 costs for interruptible workloads
-- **Elastic Fabric Adapter**: High-performance networking for HPC and ML applications
-- **Elastic Inference**: Add GPU-powered inference acceleration to EC2 instances
-
-For more information, refer to the [EC2 User Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html).
+For more information, refer to the [EC2 User Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html)

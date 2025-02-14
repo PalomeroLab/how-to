@@ -64,7 +64,7 @@ You'll be prompted for:
 > [!TIP]
 > You can set up multiple profiles using `aws configure --profile profilename`
 
-## Basic AWS CLI Usage
+##  CLI Usage Examples
 
 ### List S3 Buckets
 
@@ -84,9 +84,7 @@ aws ec2 describe-instances
 aws iam create-user --user-name newuser
 ```
 
-## Advanced CLI Features
-
-### Using JSON Parameters
+## Using JSON Parameters
 
 For complex API calls, you can use JSON files:
 
@@ -94,7 +92,7 @@ For complex API calls, you can use JSON files:
 aws ec2 run-instances --cli-input-json file://ec2-params.json
 ```
 
-### JMESPath Querying
+## JMESPath Querying
 
 Use `--query` to filter output:
 
@@ -102,7 +100,7 @@ Use `--query` to filter output:
 aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,State.Name]'
 ```
 
-### AWS CLI Aliases
+## AWS CLI Aliases
 
 Create shortcuts for common commands in `~/.aws/cli/alias`:
 

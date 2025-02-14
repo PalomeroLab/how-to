@@ -1,6 +1,6 @@
 # IAM
 
-Use IAM to securely manage access to AWS services and resources. This guide covers users, groups, policies, and best practices.
+Use IAM to securely manage access to AWS services and resources.
 
 ## Users
 
@@ -19,7 +19,8 @@ To create a user:
 > 2. Require the user to change it upon first login
 > 3. Enable Multi-Factor Authentication (MFA)
 
-Best practice: Don't attach policies directly to users. Use groups to manage permissions instead.
+Best practice: Don't attach policies directly to users. Use groups to manage
+permissions instead.
 
 ### Example: Creating a user with AWS CLI
 
@@ -30,7 +31,8 @@ aws iam create-login-profile --user-name johndoe --password "InitialPassword123!
 
 ## Groups and Policies
 
-Groups simplify permission management by allowing you to assign policies to multiple users at once.
+Groups simplify permission management by allowing you to assign policies to
+multiple users at once.
 
 We have three custom groups:
 
@@ -56,11 +58,13 @@ aws iam add-user-to-group --user-name johndoe --group-name LabUser
 
 ## Policies
 
-Policies define permissions for AWS resources. They can be AWS-managed, customer-managed, or inline.
+Policies define permissions for AWS resources. They can be AWS-managed,
+customer-managed, or inline.
 
 ### Inline Policies
 
-Inline policies are directly attached to a user, group, or role. They're useful for one-off permissions.
+Inline policies are directly attached to a user, group, or role. They're useful
+for one-off permissions.
 
 Example: Allowing access to EC2 Serial Console
 
@@ -86,18 +90,10 @@ Example: Allowing access to EC2 Serial Console
 
 More about policy syntax: [IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)
 
-## Best Practices
-
-1. Follow the principle of least privilege
-2. Use groups for permission management
-3. Enable MFA for all users
-4. Regularly audit and remove unused users, groups, and policies
-5. Use AWS Organizations for multi-account environments
-6. Implement a strong password policy
-
 ## Monitoring and Auditing
 
-Use AWS CloudTrail to log IAM and AWS account activity. Set up CloudWatch alarms to alert on suspicious activity.
+Use AWS CloudTrail to log IAM and AWS account activity. Set up CloudWatch alarms
+to alert on suspicious activity.
 
 Example CloudWatch alarm for failed console sign-in attempts:
 
@@ -113,5 +109,14 @@ Example CloudWatch alarm for failed console sign-in attempts:
   "AlarmActions": ["arn:aws:sns:us-east-1:123456789012:SecurityNotifications"]
 }
 ```
+
+## Best Practices
+
+1. Follow the principle of least privilege
+2. Use groups for permission management
+3. Enable MFA for all users
+4. Regularly audit and remove unused users, groups, and policies
+5. Use AWS Organizations for multi-account environments
+6. Implement a strong password policy
 
 For more information, refer to the [IAM User Guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html).
