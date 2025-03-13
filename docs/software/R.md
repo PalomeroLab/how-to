@@ -2,29 +2,70 @@
 
 ## Overview
 
-R is a programming language and environment for statistical computing and graphics. RStudio is an integrated development environment (IDE) for R, providing a console, syntax-highlighting editor, and tools for plotting, debugging, and workspace management. RStudio Server is a version of RStudio that runs on a remote server and is accessed through a web browser, ideal for cloud-based or shared computing environments.
+R is a programming language and environment for statistical graphics.
+
+RStudio is an integrated development environment (IDE) for R, providing a
+console, syntax-highlighting editor, and tools for plotting, debugging, and
+workspace management.
+
+RStudio Server is a version of RStudio that runs on a remote server and is
+accessed through a web browser, ideal for cloud-based or shared computing
+environments.
 
 ## Installation
 
-Use the docker image `rocker/rstudio` to run RStudio Server in a containerized environment. You can pull the image from Docker Hub and run it with the following command:
+Use the docker image `rocker/rstudio` to run RStudio Server in a containerized
+environment. You can pull the image from Docker Hub and run it with the
+following command:
 
 ```sh
 docker run -d -p 8787:8787 -e PASSWORD=yourpasswordhere rocker/rstudio
 ```
 
-## Connecting to RStudio Server
+## Docker containers for Bioconductor
 
-Find your EC2 instance's public IP address in the AWS console. Ensure that inbound traffic on port 8787 is allowed in the EC2 security group settings. Access RStudio Server by navigating to `http://ec2-public-ip:8787` in your web browser.
-
-## RStudio Server Login
-
-RStudio Server uses the underlying Linux system's user accounts. The default `ubuntu` user doesn't have a password set, so create one:
+Alternatively, you can use Bioconductor's Docker images,
 
 ```sh
-sudo passwd ubuntu
+docker run \
+ -e PASSWORD=bioc \
+ -p 8787:8787 \
+ bioconductor/bioconductor_docker:devel
+
 ```
 
-The RStudio Server console has elevated privileges, allowing you to run commands like `passwd` or `adduser` directly.
+Read the [docs](https://bioconductor.org/help/docker/) for more information.
+
+### Bioconductor bioc-run script
+
+For your convenience, you can use the `bioc-run` script to run Bioconductor
+without having to remember the docker command. Download and install it with:
+
+```sh
+mkdir -p ~/.local/bin
+curl https://raw.githubusercontent.com/Bioconductor/bioc-run/refs/heads/devel/bioc-run > ~/.local/bin/bioc-run
+chmod +x ~/.local/bin/bioc-run
+echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+exec "$SHELL"
+```
+
+> [!NOTE]
+> Prerequisites: `bash` and `jq`
+>
+> If you use another shell like `zsh`, replace `~/.bashrc` with `~/.zshrc`, or
+> another appropriate configuration file for your shell.
+
+## Connecting to RStudio Server
+
+Find your EC2 instance's public IP address in the AWS console. Ensure that
+inbound traffic on port 8787 is allowed in the EC2 security group settings.
+Access RStudio Server by navigating to `http://ec2-public-ip:8787` in your web
+browser.
+
+> [!NOTE]
+> RStudio Server uses the underlying Linux system's user accounts.
+> If not using a docker conntainer, the default `ubuntu` user doesn't have a
+> password set, so create one frist with `sudo passwd ubuntu`.
 
 ## Package Management
 
@@ -72,7 +113,10 @@ RStudio provides visual cues for renv usage in the "Packages" pane and access to
 
 ### Troubleshooting
 
-If `renv::restore()` fails, check for package conflicts and ensure necessary system libraries are installed. If `sessionInfo()` shows unexpected packages, check your `.Rprofile` for auto-loaded packages and verify you're in the correct project environment.
+If `renv::restore()` fails, check for package conflicts and ensure necessary
+system libraries are installed. If `sessionInfo()` shows unexpected packages,
+check your `.Rprofile` for auto-loaded packages and verify you're in the correct
+project environment.
 
 ## Interesting Facts and Advanced Topics
 

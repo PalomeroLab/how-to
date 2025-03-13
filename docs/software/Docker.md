@@ -1,6 +1,10 @@
 # Docker
 
-Docker is a platform for developing, shipping, and running applications in containers. It enables developers to package an application with all of its dependencies into a standardized unit for software development. Docker containers are lightweight and contain everything needed to run the application, including code, runtime, system tools, system libraries, and settings.
+Docker is a platform for developing, shipping, and running applications in
+containers. It enables developers to package an application with all of its
+dependencies into a standardized unit for software development. Docker
+containers are lightweight and contain everything needed to run the application,
+including code, runtime, system tools, system libraries, and settings.
 
 ## Docker Installations
 
@@ -9,12 +13,16 @@ There are two main Docker installations:
 1. Docker Desktop for Linux
 2. Docker Engine
 
-Docker Desktop is recommended for beginners as it provides a user-friendly interface and additional features. [Source](https://docs.docker.com/desktop/install/linux/)
+Docker Desktop is recommended for beginners as it provides a user-friendly
+interface and additional features.
+[Source](https://docs.docker.com/desktop/install/linux/)
 
 ## Installation
 
 > [!CAUTION]
-> Always check the [official Docker documentation](https://docs.docker.com/engine/install/ubuntu/) for the most up-to-date instructions. The following steps are for Ubuntu 22.04.
+> Always check the [official Docker
+> documentation](https://docs.docker.com/engine/install/ubuntu/) for the most
+> up-to-date instructions. The following steps are for Ubuntu 22.04.
 
 ### Preparing for Installation
 
