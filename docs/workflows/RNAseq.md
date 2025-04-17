@@ -1,9 +1,17 @@
 # RNA Sequencing Analysis
 
-RNA sequencing (RNA-seq) is a technique used to analyze the transcriptome -
+RNA sequencing (RNA-seq) is a technique used to analyze the _transcriptome_ —
 the complete set of RNA transcripts in a cell. This method involves sequencing
 RNA molecules after reverse transcription to cDNA to examine gene expression levels
 and identify novel transcripts.
+
+## Pre-requisites
+
+Before starting the analysis, ensure you have the following:
+
+- Aligned reads in SAM/BAM/CRAM format
+- A reference annotation file in GTF or GFF format
+- A read quantification tool such as featureCounts or HTSeq
 
 This document describes two pipelines for RNA-seq analysis:
 
@@ -36,6 +44,17 @@ Example usage:
 featureCounts -T "$NUM_THREADS" --verbose -t exon -g gene_id --countReadPairs \
   -a "$REF_GTF" -p -P -C -B -o "${OUT_DIR}/${OUT_PREFIX}.tsv" ./*.bam
 ```
+
+Or, more simply:
+
+```sh
+featureCounts -a ${ANNOTATION} -p --countReadPairs -T$(nproc) -o total_counts.txt ./*.bam
+```
+
+Annotation file from `seqs_for_alignment_pipelines.ucsc_ids/`
+
+- GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.gff.gz 2024-09-10 13:15 74M
+- GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.gtf.gz
 
 ### Output
 
@@ -129,8 +148,6 @@ binomial distribution.
 > perform regularized log transformation and variance stabilizing
 > transformation. The package also provides functions to visualize the data and
 > results.
-
-<!-- -->
 
 ## Tuxedo Suite
 
