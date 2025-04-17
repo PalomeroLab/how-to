@@ -1,0 +1,343 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/amazon-web-services/s3/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>S3 - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "S3";
+        var mkdocs_page_input_path = "amazon-web-services/s3.md";
+        var mkdocs_page_url = "/how-to/amazon-web-services/s3/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">S3</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#working-with-s3-objects">Working with S3 Objects</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#renamemove-objects">Rename/Move Objects</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-objects-with-a-specific-prefix">List Objects with a Specific Prefix</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delete-multiple-objects">Delete Multiple Objects</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#s3-storage-classes">S3 Storage Classes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#working-with-glacier-storage-class">Working with Glacier Storage Class</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mounting-s3-as-a-filesystem">Mounting S3 as a Filesystem</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-start">Quick start</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Amazon web services</li>
+      <li class="breadcrumb-item active">S3</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/amazon-web-services/s3.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../iam/" class="btn btn-neutral float-left" title="IAM"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../command-line/" class="btn btn-neutral float-right" title="Linux and the Command Line">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="s3">S3</h1>
+<p>Amazon S3 (Simple Storage Service) is an object storage service offering industry-leading scalability, data availability, security, and performance.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List Buckets</td>
+<td><code>aws s3 ls</code></td>
+</tr>
+<tr>
+<td>Create a Bucket</td>
+<td><code>aws s3 mb s3://my-new-bucket</code></td>
+</tr>
+<tr>
+<td>Upload a File</td>
+<td><code>aws s3 cp localfile.txt s3://my-bucket/</code></td>
+</tr>
+<tr>
+<td>Download a File</td>
+<td><code>aws s3 cp s3://my-bucket/remotefile.txt .</code></td>
+</tr>
+<tr>
+<td>Sync Files</td>
+<td><code>aws s3 sync &lt;source&gt; &lt;target&gt; [--options]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note: For the sync command, replace <code>&lt;source&gt;</code> and <code>&lt;target&gt;</code> with appropriate local or S3 paths, and add any necessary options.</p>
+<p>Options include:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--exclude</code></td>
+<td>Exclude files matching the pattern</td>
+</tr>
+<tr>
+<td><code>--include</code></td>
+<td>Include files matching the pattern</td>
+</tr>
+<tr>
+<td><code>--dryrun</code></td>
+<td>Simulate the sync operation</td>
+</tr>
+<tr>
+<td><code>--delete</code></td>
+<td>Remove files in target not present in source</td>
+</tr>
+<tr>
+<td><code>--quiet</code></td>
+<td>Suppress non-error output</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre class="highlight"><code class="language-sh">aws s3 sync . s3://my-bucket/backup --exclude "*.tmp" --delete</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use the "Copy S3 URI" button in the S3 console to easily copy bucket/object URIs.</p>
+</div>
+<h2 id="working-with-s3-objects">Working with S3 Objects</h2>
+<h3 id="renamemove-objects">Rename/Move Objects</h3>
+<p>While <code>mv</code> exists, it's not atomic. Use <code>cp</code> followed by <code>rm</code> for better control:</p>
+<pre class="highlight"><code class="language-sh">aws s3 cp s3://my-bucket/oldname s3://my-bucket/newname \
+    &amp;&amp; aws s3 rm s3://my-bucket/oldname</code></pre>
+<h3 id="list-objects-with-a-specific-prefix">List Objects with a Specific Prefix</h3>
+<pre class="highlight"><code class="language-sh">aws s3 ls s3://my-bucket/prefix/</code></pre>
+<h3 id="delete-multiple-objects">Delete Multiple Objects</h3>
+<pre class="highlight"><code class="language-sh">aws s3 rm s3://my-bucket/prefix --recursive</code></pre>
+<h2 id="s3-storage-classes">S3 Storage Classes</h2>
+<p>S3 offers various <a href="https://aws.amazon.com/s3/storage-classes/">storage classes</a> for different use cases:</p>
+<ul>
+<li>Standard</li>
+<li>Intelligent-Tiering</li>
+<li>Glacier Instant Retrieval</li>
+<li>Glacier Deep Archive</li>
+</ul>
+<h3 id="working-with-glacier-storage-class">Working with Glacier Storage Class</h3>
+<p>To restore a Glacier object:</p>
+<pre class="highlight"><code class="language-sh">aws s3api restore-object --bucket my-bucket --key path/to/object --restore-request '{"Days":5,"GlacierJobParameters":{"Tier":"Standard"}}'</code></pre>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/restore-object.html">documentation</a></p>
+<p>Check restore status:</p>
+<pre class="highlight"><code class="language-sh">aws s3api head-object --bucket my-bucket --key path/to/object</code></pre>
+<p>When downloading restored Glacier objects:</p>
+<pre class="highlight"><code class="language-sh">aws s3 cp s3://my-bucket/path/to/object . --force-glacier-transfer</code></pre>
+<h2 id="mounting-s3-as-a-filesystem">Mounting S3 as a Filesystem</h2>
+<p>Using <a href="https://github.com/awslabs/mountpoint-s3">mountpoint-s3</a>:</p>
+<ol>
+<li>Install:</li>
+</ol>
+<p>On Ubuntu:</p>
+<pre class="highlight"><code class="language-sh">wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.deb
+sudo apt-get install ./mount-s3.deb -y &amp;&amp; rm mount-s3.deb</code></pre>
+<p>On macOS:</p>
+<pre class="highlight"><code class="language-sh">brew install --cask macfuse # install the prerequisite FUSE library
+wget https://s3.amazonaws.com/mountpoint-s3-release/latest/arm64/mount-s3.tar.gz
+sudo mkdir -p /opt/aws/mountpoint-s3 &amp;&amp; sudo tar -C /opt/aws/mountpoint-s3 -xzf ./mount-s3.tar.gz
+export PATH=$PATH:/opt/aws/mountpoint-s3/bin # add to .zshrc</code></pre>
+<ol>
+<li>Mount:</li>
+</ol>
+<pre class="highlight"><code class="language-sh">mkdir -vp /mnt/s3/my-bucket
+mount-s3 my-bucket /mnt/s3/my-bucket</code></pre>
+<p>For more information, refer to the
+<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/mountpoint.html">Mountpoint S3 documentation</a>.</p>
+<h3 id="quick-start">Quick start</h3>
+<p>Create mountpoints for each bucket you have access to:</p>
+<pre class="highlight"><code class="language-sh">for bucket in $(aws s3 ls | awk '{print $3}'); do
+    mkdir -vp ./s3/$bucket
+    mount-s3 $bucket ./s3/$bucket
+done</code></pre>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>This command will mount all buckets you have access to in the present working
+directory. Ensure you have the necessary permissions and that this is where
+you want to mount the buckets.</p>
+</div>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../iam/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../command-line/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

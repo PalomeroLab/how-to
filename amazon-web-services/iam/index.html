@@ -1,0 +1,334 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/amazon-web-services/iam/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>IAM - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "IAM";
+        var mkdocs_page_input_path = "amazon-web-services/iam.md";
+        var mkdocs_page_url = "/how-to/amazon-web-services/iam/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">IAM</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#users">Users</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-creating-a-user-with-aws-cli">Example: Creating a user with AWS CLI</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#groups-and-policies">Groups and Policies</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-group">Creating a Group</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-creating-a-group-with-aws-cli">Example: Creating a group with AWS CLI</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#policies">Policies</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#inline-policies">Inline Policies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-custom-policy">Creating a Custom Policy</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#monitoring-and-auditing">Monitoring and Auditing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Amazon web services</li>
+      <li class="breadcrumb-item active">IAM</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/amazon-web-services/iam.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../ec2/" class="btn btn-neutral float-left" title="EC2"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="../s3/" class="btn btn-neutral float-right" title="S3">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="iam">IAM</h1>
+<p>Use IAM to securely manage access to AWS services and resources.</p>
+<h2 id="users">Users</h2>
+<p>To create a user:</p>
+<ol>
+<li>Navigate to <code>IAM</code> in the AWS Management Console</li>
+<li>Select <code>Users</code> from the left sidebar</li>
+<li>Click <code>Create user</code></li>
+<li>Follow the prompts to set up the user</li>
+</ol>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Providing user access to the AWS Management Console is a security risk.
+If you must provide access:</p>
+<ol>
+<li>Create an auto-generated password</li>
+<li>Require the user to change it upon first login</li>
+<li>Enable Multi-Factor Authentication (MFA)</li>
+</ol>
+</div>
+<p>Best practice: Don't attach policies directly to users. Use groups to manage
+permissions instead.</p>
+<h3 id="example-creating-a-user-with-aws-cli">Example: Creating a user with AWS CLI</h3>
+<pre class="highlight"><code class="language-bash">aws iam create-user --user-name johndoe
+aws iam create-login-profile --user-name johndoe --password "InitialPassword123!" --password-reset-required</code></pre>
+<h2 id="groups-and-policies">Groups and Policies</h2>
+<p>Groups simplify permission management by allowing you to assign policies to
+multiple users at once.</p>
+<p>We have three custom groups:</p>
+<table>
+<thead>
+<tr>
+<th>Group Name</th>
+<th>Policies</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LabAdmin</td>
+<td>AdministratorAccess</td>
+<td>For administrators who need full access</td>
+</tr>
+<tr>
+<td>LabUser</td>
+<td>FullAccess to IAM, CloudShell, EC2, S3, and Glacier</td>
+<td>For regular lab users with broad but limited access</td>
+</tr>
+<tr>
+<td>LabGuest</td>
+<td>AmazonS3ReadOnlyAccess, AmazonGlacierFullAccess, IAMUserChangePassword</td>
+<td>For collaborators who need minimal access</td>
+</tr>
+</tbody>
+</table>
+<h3 id="creating-a-group">Creating a Group</h3>
+<ol>
+<li>Go to <code>IAM</code> &gt; <code>User groups</code> &gt; <code>Create group</code></li>
+<li>Name the group and attach relevant policies</li>
+<li>Add users to the group</li>
+</ol>
+<h3 id="example-creating-a-group-with-aws-cli">Example: Creating a group with AWS CLI</h3>
+<pre class="highlight"><code class="language-bash">aws iam create-group --group-name LabUser
+aws iam attach-group-policy --group-name LabUser --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess
+aws iam add-user-to-group --user-name johndoe --group-name LabUser</code></pre>
+<h2 id="policies">Policies</h2>
+<p>Policies define permissions for AWS resources. They can be AWS-managed,
+customer-managed, or inline.</p>
+<h3 id="inline-policies">Inline Policies</h3>
+<p>Inline policies are directly attached to a user, group, or role. They're useful
+for one-off permissions.</p>
+<p>Example: Allowing access to EC2 Serial Console</p>
+<pre class="highlight"><code class="language-json">{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowInstanceBasedSerialConsoleAccess",
+      "Effect": "Allow",
+      "Action": ["ec2-instance-connect:SendSerialConsoleSSHPublicKey"],
+      "Resource": "*"
+    }
+  ]
+}</code></pre>
+<h3 id="creating-a-custom-policy">Creating a Custom Policy</h3>
+<ol>
+<li>Go to <code>IAM</code> &gt; <code>Policies</code> &gt; <code>Create policy</code></li>
+<li>Use the visual editor or JSON editor to define permissions</li>
+<li>Review and create the policy</li>
+</ol>
+<p>More about policy syntax: <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html">IAM Policy Reference</a></p>
+<h2 id="monitoring-and-auditing">Monitoring and Auditing</h2>
+<p>Use AWS CloudTrail to log IAM and AWS account activity. Set up CloudWatch alarms
+to alert on suspicious activity.</p>
+<p>Example CloudWatch alarm for failed console sign-in attempts:</p>
+<pre class="highlight"><code class="language-json">{
+  "MetricName": "ConsoleSignInFailures",
+  "Namespace": "AWS/IAM",
+  "Statistic": "Sum",
+  "Period": 300,
+  "EvaluationPeriods": 1,
+  "Threshold": 3,
+  "ComparisonOperator": "GreaterThanThreshold",
+  "AlarmActions": ["arn:aws:sns:us-east-1:123456789012:SecurityNotifications"]
+}</code></pre>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li>Follow the principle of least privilege</li>
+<li>Use groups for permission management</li>
+<li>Enable MFA for all users</li>
+<li>Regularly audit and remove unused users, groups, and policies</li>
+<li>Use AWS Organizations for multi-account environments</li>
+<li>Implement a strong password policy</li>
+</ol>
+<p>For more information, refer to the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAM User Guide</a>.</p>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../ec2/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../s3/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/software/samtools/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Samtools - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Samtools";
+        var mkdocs_page_input_path = "software/samtools.md";
+        var mkdocs_page_url = "/how-to/software/samtools/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Samtools</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#samtools-commands">samtools Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#indexing">Indexing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#editing">Editing</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#handling-duplicate-reads">Handling Duplicate Reads</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#file-operations">File operations</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#sorting-and-indexing">Sorting and Indexing</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#merging-and-splitting">Merging and Splitting</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#statistics">Statistics</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#viewing">Viewing</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#working-with-cram-files">Working with CRAM Files</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#important-considerations-for-cram">Important Considerations for CRAM</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#best-practices-and-tips">Best Practices and Tips</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practical-workflow-example">Practical Workflow Example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example-pipelines">Example Pipelines</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Software</li>
+      <li class="breadcrumb-item active">Samtools</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/software/samtools.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../jupyter/" class="btn btn-neutral float-left" title="Jupyter"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../workflows/" class="btn btn-neutral float-right" title="Illumina Sequencing">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="samtools">Samtools</h1>
+<p><a href="http://www.htslib.org/doc/samtools.html">Samtools</a> is a suite of programs for
+manipulating high-throughput sequencing data consisting of:</p>
+<ul>
+<li><a href="https://github.com/samtools/samtools">Samtools</a>: For handling SAM/BAM/CRAM formats</li>
+<li><a href="https://github.com/samtools/bcftools">BCFtools</a>: Variant calling (VCF/BCF formats)</li>
+<li><a href="https://github.com/samtools/htslib">HTSlib</a>: The underlying C library</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Read the official samtools documentation <a href="http://www.htslib.org/doc/samtools.html">here</a></p>
+</div>
+<h2 id="samtools-commands"><code>samtools</code> Commands</h2>
+<h3 id="indexing">Indexing</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dict</code></td>
+<td>create a sequence dictionary file</td>
+<td></td>
+</tr>
+<tr>
+<td><code>faidx</code></td>
+<td>index/extract FASTA</td>
+<td></td>
+</tr>
+<tr>
+<td><code>fqidx</code></td>
+<td>index/extract FASTQ</td>
+<td></td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td>index alignment</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="editing">Editing</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>calmd</code></td>
+<td>recalculate MD/NM tags and '=' bases</td>
+<td></td>
+</tr>
+<tr>
+<td><code>fixmate</code></td>
+<td>fix mate information</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reheader</code></td>
+<td>replace BAM header</td>
+<td></td>
+</tr>
+<tr>
+<td><code>targetcut</code></td>
+<td>cut fosmid regions (for fosmid pool only)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>addreplacerg</code></td>
+<td>adds or replaces RG tags</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="#markdup"><code>markdup</code></a></td>
+<td>mark duplicates</td>
+<td><code>samtools markdup in.algnsorted.bam out.bam</code></td>
+</tr>
+<tr>
+<td><code>ampliconclip</code></td>
+<td>clip oligos from the end of reads</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="handling-duplicate-reads">Handling Duplicate Reads <a name="markdup"></a></h4>
+<p>Let's assume we already have sorted, marked duplicates, and indexed BAM files.</p>
+<pre class="highlight"><code class="language-sh">for bamfile in ./*.bam; do
+# note that in this case, files are named like `DNMT3A_sorted_markdup.bam`
+    samtools markdup @$(nproc) -r -s $bamfile ${bamfile%markdup.bam}dedup.bam
+done</code></pre>
+<h3 id="file-operations">File operations</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>collate</code></td>
+<td>shuffle and group alignments by name</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cat</code></td>
+<td>concatenate BAMs</td>
+<td></td>
+</tr>
+<tr>
+<td><code>consensus</code></td>
+<td>produce a consensus Pileup/FASTA/FASTQ</td>
+<td></td>
+</tr>
+<tr>
+<td><code>merge</code></td>
+<td>merge sorted alignments</td>
+<td></td>
+</tr>
+<tr>
+<td><code>mpileup</code></td>
+<td>multi-way pileup</td>
+<td></td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>sort alignment file</td>
+<td></td>
+</tr>
+<tr>
+<td><code>split</code></td>
+<td>splits a file by read group</td>
+<td></td>
+</tr>
+<tr>
+<td><code>quickcheck</code></td>
+<td>quickly check if SAM/BAM/CRAM file appears intact</td>
+<td></td>
+</tr>
+<tr>
+<td><code>fastq</code></td>
+<td>converts a BAM to a FASTQ</td>
+<td></td>
+</tr>
+<tr>
+<td><code>fasta</code></td>
+<td>converts a BAM to a FASTA</td>
+<td></td>
+</tr>
+<tr>
+<td><code>import</code></td>
+<td>Converts FASTA or FASTQ files to SAM/BAM/CRAM</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reference</code></td>
+<td>Generates a reference from aligned data</td>
+<td></td>
+</tr>
+<tr>
+<td><code>reset</code></td>
+<td>Reverts aligner changes in reads</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="sorting-and-indexing">Sorting and Indexing</h4>
+<p><code>samtools sort</code>: Sort alignments by leftmost coordinates</p>
+<p>Sort a BAM file:</p>
+<pre class="highlight"><code class="language-sh">samtools sort -o sorted_output.bam input.bam</code></pre>
+<p>Sort by read names (useful for some tools):</p>
+<pre class="highlight"><code class="language-sh">samtools sort -n -o name_sorted.bam input.bam</code></pre>
+<p><code>samtools index</code>: Index a sorted BAM/CRAM file</p>
+<pre class="highlight"><code class="language-sh">samtools index sorted_output.bam</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Always index your sorted BAM files.
+Many tools require indexed BAMs for efficient access.</p>
+</div>
+<h4 id="merging-and-splitting">Merging and Splitting</h4>
+<p><code>samtools merge</code>: Combine multiple BAM files</p>
+<pre class="highlight"><code class="language-sh">samtools merge output.bam input1.bam input2.bam input3.bam</code></pre>
+<p>Ensure all input BAMs are sorted in the same way (coordinate or query name).</p>
+<p><code>samtools split</code>: Split a BAM file by read group</p>
+<pre class="highlight"><code class="language-sh">samtools split -u unassigned.bam -f '%*_%!.bam' input.bam</code></pre>
+<p>This is useful when you have multiple samples in one BAM file.</p>
+<h3 id="statistics">Statistics</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bedcov</code></td>
+<td>read depth per BED region</td>
+<td></td>
+</tr>
+<tr>
+<td><code>coverage</code></td>
+<td>alignment depth and percent coverage</td>
+<td></td>
+</tr>
+<tr>
+<td><code>depth</code></td>
+<td>compute the depth</td>
+<td></td>
+</tr>
+<tr>
+<td><code>flagstat</code></td>
+<td>simple stats</td>
+<td></td>
+</tr>
+<tr>
+<td><code>idxstats</code></td>
+<td>BAM index stats</td>
+<td></td>
+</tr>
+<tr>
+<td><code>cram-size</code></td>
+<td>list CRAM Content-ID and Data-Series sizes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>phase</code></td>
+<td>phase heterozygotes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td>generate stats (former bamcheck)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ampliconstats</code></td>
+<td>generate amplicon specific stats</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><code>samtools flagstat</code>: Generate simple alignment statistics</p>
+<pre class="highlight"><code class="language-sh">samtools flagstat input.bam</code></pre>
+<p><code>samtools idxstats</code>: Report alignment summary statistics</p>
+<pre class="highlight"><code class="language-sh">samtools idxstats input.bam</code></pre>
+<p><code>samtools stats</code>: Generate comprehensive statistics</p>
+<pre class="highlight"><code class="language-sh">samtools stats input.bam &gt; stats.txt</code></pre>
+<p>Use <code>plot-bamstats</code> to visualize these statistics.</p>
+<h3 id="viewing">Viewing</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flags</code></td>
+<td>explain BAM flags</td>
+<td></td>
+</tr>
+<tr>
+<td><code>head</code></td>
+<td>header viewer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>tview</code></td>
+<td>text alignment viewer</td>
+<td></td>
+</tr>
+<tr>
+<td><code>view</code></td>
+<td>SAM&lt;-&gt;BAM&lt;-&gt;CRAM conversion</td>
+<td></td>
+</tr>
+<tr>
+<td><code>depad</code></td>
+<td>convert padded BAM to unpadded BAM</td>
+<td></td>
+</tr>
+<tr>
+<td><code>samples</code></td>
+<td>list the samples in a set of SAM/BAM/CRAM files</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Convert SAM to BAM:</p>
+<pre class="highlight"><code class="language-sh">samtools view -b -o output.bam input.sam</code></pre>
+<p>Convert BAM to CRAM (requires indexed reference genome):</p>
+<pre class="highlight"><code class="language-sh">samtools view -C -T reference.fa -o output.cram input.bam</code></pre>
+<p>View specific region of a BAM file:</p>
+<pre class="highlight"><code class="language-sh">samtools view input.bam chr1:1000000-2000000</code></pre>
+<p>Filter for mapped reads and convert to SAM:</p>
+<pre class="highlight"><code class="language-sh">samtools view -F 4 -h -o mapped_reads.sam input.bam</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>-F 4</code> flag filters out unmapped reads. Run <code>samtools flags</code> for more info.</p>
+</div>
+<h2 id="working-with-cram-files">Working with CRAM Files</h2>
+<p>CRAM is a compressed alternative to BAM, offering significant space savings.</p>
+<p>Converting BAM to CRAM:</p>
+<pre class="highlight"><code class="language-sh">samtools view -C -T reference.fa -o output.cram input.bam</code></pre>
+<h3 id="important-considerations-for-cram">Important Considerations for CRAM</h3>
+<ul>
+<li>Always keep your reference genome available.</li>
+<li>Use the exact same reference for creating and reading CRAM files.</li>
+<li>Set the <code>REF_PATH</code> environment variable to help samtools locate reference sequences:</li>
+</ul>
+<pre class="highlight"><code class="language-sh">export REF_PATH="/path/to/references/%2s/%2s/%s:http://www.ebi.ac.uk/ena/cram/md5/%s"</code></pre>
+<p>This allows for local and EBI-hosted reference lookup.</p>
+<h2 id="best-practices-and-tips">Best Practices and Tips</h2>
+<p>Always work with sorted and indexed BAM/CRAM files for efficiency.</p>
+<p>Use multithreading when available:</p>
+<pre class="highlight"><code class="language-sh">samtools sort -@ 4 -o sorted.bam input.bam</code></pre>
+<p>When working with large files, use the <code>-c</code> option to compress temporary files:</p>
+<pre class="highlight"><code class="language-sh">samtools sort -c -m 4G -o sorted.bam input.bam</code></pre>
+<p>For variant calling workflows, mark duplicates:</p>
+<pre class="highlight"><code class="language-sh">samtools markdup input.bam output.bam</code></pre>
+<p>Use <code>samtools faidx</code> to index your reference genome:</p>
+<pre class="highlight"><code class="language-sh">samtools faidx reference.fa</code></pre>
+<p>When downloading reference genomes, ensure they're bgzip-compressed:</p>
+<pre class="highlight"><code class="language-sh"># If you have a gzipped file:
+gunzip reference.fa.gz
+bgzip reference.fa
+samtools faidx reference.fa.gz</code></pre>
+<p>For large-scale analyses, consider using CRAM format to save storage space.</p>
+<h2 id="practical-workflow-example">Practical Workflow Example</h2>
+<p>Here's a typical workflow for processing a new sequencing run:</p>
+<pre class="highlight"><code class="language-sh"># Convert FASTQ to BAM (assuming you've already aligned with BWA)
+bwa mem -t 8 reference.fa read1.fq read2.fq | samtools view -b -o raw_aligned.bam -
+
+# Sort the BAM file
+samtools sort -@ 8 -o sorted.bam raw_aligned.bam
+
+# Mark duplicates
+samtools markdup -@ 8 sorted.bam marked_duplicates.bam
+
+# Index the final BAM
+samtools index marked_duplicates.bam
+
+# Generate alignment statistics
+samtools flagstat marked_duplicates.bam &gt; alignment_stats.txt
+samtools idxstats marked_duplicates.bam &gt; chromosome_stats.txt
+
+# Convert to CRAM for storage
+samtools view -C -T reference.fa -o final_output.cram marked_duplicates.bam</code></pre>
+<h2 id="example-pipelines">Example Pipelines</h2>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../jupyter/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../workflows/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

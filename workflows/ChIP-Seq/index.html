@@ -1,0 +1,286 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/workflows/ChIP-Seq/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>ChIP-seq Analysis - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ChIP-seq Analysis";
+        var mkdocs_page_input_path = "workflows/ChIP-Seq.md";
+        var mkdocs_page_url = "/how-to/workflows/ChIP-Seq/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">ChIP-seq Analysis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#parse2wig">parse2wig</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-peak-calling">3. Peak Calling</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-visualization-and-analysis">4. Visualization and Analysis</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#drompa">DROMPA</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#references">References</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Workflows</li>
+      <li class="breadcrumb-item active">ChIP-seq Analysis</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/workflows/ChIP-Seq.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../Azenta/" class="btn btn-neutral float-left" title="Azenta sFTP Data Delivery"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="../rnaseq/" class="btn btn-neutral float-right" title="RNA Sequencing Analysis">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="chip-seq-analysis">ChIP-seq Analysis</h1>
+<h2 id="overview">Overview</h2>
+<p>Chromatin immunoprecipitation sequencing (ChIP-seq) is used to analyze protein
+interactions with DNA. It combines chromatin immunoprecipitation (ChIP) with massively
+parallel DNA sequencing to identify the binding sites of DNA-associated proteins.</p>
+<h3 id="parse2wig">parse2wig</h3>
+<p>parse2wig is a tool for converting aligned read files to wiggle format, which is useful for visualization in genome browsers.</p>
+<h3 id="3-peak-calling">3. Peak Calling</h3>
+<p>Peak calling is a crucial step in ChIP-seq analysis, identifying regions of the genome where proteins of interest are bound. Several tools are available:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MACS2[^1]</td>
+<td>Model-based Analysis of ChIP-Seq. Captures local biases in sequencing data and models peak shape to improve accuracy.</td>
+<td><a href="https://github.com/macs3-project/MACS">GitHub</a></td>
+</tr>
+<tr>
+<td>IDR[^2]</td>
+<td>Irreproducible Discovery Rate. Assesses reproducibility of findings across replicates.</td>
+<td><a href="https://github.com/nboley/idr">GitHub</a></td>
+</tr>
+<tr>
+<td>phantompeakqualtools[^3]</td>
+<td>A package for ChIP-seq quality control metrics, including strand cross-correlation.</td>
+<td><a href="https://github.com/kundajelab/phantompeakqualtools">GitHub</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-visualization-and-analysis">4. Visualization and Analysis</h3>
+<h4 id="drompa">DROMPA</h4>
+<p>DROMPA (DRaw and Observe Multiple enrichment Profiles and Annotation) is a comprehensive tool for easy-to-handle peak calling and visualization in ChIP-seq data analysis[^4].</p>
+<p>Key features:</p>
+<ul>
+<li>Peak calling</li>
+<li>Visualization of enrichment profiles</li>
+<li>Annotation of peaks</li>
+<li>Computational analysis and validation of ChIP-seq data</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Peak Calling</td>
+<td>Identifies significant binding sites using a sliding window approach</td>
+</tr>
+<tr>
+<td>Visualization</td>
+<td>Generates publication-quality figures of ChIP-seq enrichment profiles</td>
+</tr>
+<tr>
+<td>Annotation</td>
+<td>Associates peaks with genomic features (e.g., promoters, genes)</td>
+</tr>
+<tr>
+<td>Comparative Analysis</td>
+<td>Allows comparison of multiple ChIP-seq datasets</td>
+</tr>
+</tbody>
+</table>
+<h2 id="references">References</h2>
+<p>[^1]: Zhang Y, Liu T, Meyer CA, et al. Model-based Analysis of ChIP-Seq (MACS). Genome Biol. 2008;9(9):R137. <a href="https://pubmed.ncbi.nlm.nih.gov/18798982/">PMID: 18798982</a></p>
+<p>[^2]: Li Q, Brown JB, Huang H, Bickel PJ. Measuring reproducibility of high-throughput experiments. Ann Appl Stat. 2011;5(3):1752-1779. <a href="https://projecteuclid.org/euclid.aoas/1318514284">DOI: 10.1214/11-AOAS466</a></p>
+<p>[^3]: Landt SG, Marinov GK, Kundaje A, et al. ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia. Genome Res. 2012;22(9):1813-1831. <a href="https://pubmed.ncbi.nlm.nih.gov/22955991/">PMID: 22955991</a></p>
+<p>[^4]: Nakato R, Itoh T, Shirahige K. DROMPA: easy-to-handle peak calling and visualization software for the computational analysis and validation of ChIP-seq data. Genes Cells. 2013;18(7):589-601. <a href="https://pubmed.ncbi.nlm.nih.gov/23672187/">PMID: 23672187</a></p>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Azenta/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../rnaseq/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

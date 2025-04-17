@@ -1,0 +1,303 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/software/Docker/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Docker - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Docker";
+        var mkdocs_page_input_path = "software/Docker.md";
+        var mkdocs_page_url = "/how-to/software/Docker/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Package Management</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Docker</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#docker-installations">Docker Installations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#preparing-for-installation">Preparing for Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ubuntu-installation">Ubuntu Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-up-pass-for-credential-storage">Setting up pass for Credential Storage</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installing-rstudio-server-via-docker">Installing RStudio Server via Docker</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#docker-engine-examples">Docker Engine Examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#building-multi-architecture-images">Building Multi-Architecture Images</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Software</li>
+      <li class="breadcrumb-item active">Docker</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/software/Docker.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Package Management"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="../R/" class="btn btn-neutral float-right" title="R, RStudio, and RStudio Server">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="docker">Docker</h1>
+<p>Docker is a platform for developing, shipping, and running applications in
+containers. It enables developers to package an application with all of its
+dependencies into a standardized unit for software development. Docker
+containers are lightweight and contain everything needed to run the application,
+including code, runtime, system tools, system libraries, and settings.</p>
+<h2 id="docker-installations">Docker Installations</h2>
+<p>There are two main Docker installations:</p>
+<ol>
+<li>Docker Desktop for Linux</li>
+<li>Docker Engine</li>
+</ol>
+<p>Docker Desktop is recommended for beginners as it provides a user-friendly
+interface and additional features.
+<a href="https://docs.docker.com/desktop/install/linux/">Source</a></p>
+<h2 id="installation">Installation</h2>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Always check the <a href="https://docs.docker.com/engine/install/ubuntu/">official Docker
+documentation</a> for the most
+up-to-date instructions. The following steps are for Ubuntu 22.04.</p>
+</div>
+<h3 id="preparing-for-installation">Preparing for Installation</h3>
+<p>First, remove any old or unofficial versions of Docker:</p>
+<pre class="highlight"><code class="language-sh">for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done</code></pre>
+<h3 id="ubuntu-installation">Ubuntu Installation</h3>
+<ol>
+<li>
+<p>Set up Docker's <code>apt</code> repository:
+   Follow the instructions in the <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository">official guide</a>.</p>
+</li>
+<li>
+<p>Install Docker Desktop:
+   Follow the steps outlined <a href="https://docs.docker.com/desktop/install/linux/ubuntu/#install-docker-desktop">here</a>.</p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may need to enable virtualization in your system's BIOS settings for Docker Desktop to work properly.</p>
+</div>
+<h3 id="setting-up-pass-for-credential-storage">Setting up <code>pass</code> for Credential Storage</h3>
+<p>Docker uses <code>pass</code> to store credentials securely. Initialize it with:</p>
+<pre class="highlight"><code class="language-sh">gpg --generate-key
+pass init "Your GPG ID or email"</code></pre>
+<h2 id="installing-rstudio-server-via-docker">Installing RStudio Server via Docker</h2>
+<p>To run RStudio Server in a Docker container:</p>
+<ol>
+<li>Pull the RStudio Server image:</li>
+</ol>
+<pre class="highlight"><code class="language-sh">docker pull rocker/rstudio</code></pre>
+<ol>
+<li>Run the container:</li>
+</ol>
+<pre class="highlight"><code class="language-sh">docker run -d -p 8787:8787 -e PASSWORD=yourpassword --name rstudio rocker/rstudio</code></pre>
+<p>This command:</p>
+<ul>
+<li>Runs the container in detached mode (<code>-d</code>)</li>
+<li>Maps port 8787 on the host to port 8787 in the container (<code>-p 8787:8787</code>)</li>
+<li>Sets a password for the RStudio user (<code>-e PASSWORD=yourpassword</code>)</li>
+<li>
+<p>Names the container "rstudio" (<code>--name rstudio</code>)</p>
+</li>
+<li>
+<p>Access RStudio Server by navigating to <code>http://localhost:8787</code> in your web browser.</p>
+</li>
+</ul>
+<h2 id="docker-engine-examples">Docker Engine Examples</h2>
+<h3 id="building-multi-architecture-images">Building Multi-Architecture Images</h3>
+<p>To build images for different architectures:</p>
+<ol>
+<li>Set up buildx:</li>
+</ol>
+<pre class="highlight"><code class="language-sh">docker buildx create --use</code></pre>
+<ol>
+<li>Build and push an amd64 image:
+   <pre class="highlight"><code class="language-sh">docker buildx build --platform linux/amd64 -t yourusername/imagename:tag . --push</code></pre></li>
+</ol>
+<p>This process allows you to create images that can run on different CPU architectures, improving portability across various systems.</p>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li>Use official base images when possible.</li>
+<li>Minimize the number of layers in your Dockerfile.</li>
+<li>Use multi-stage builds to reduce final image size.</li>
+<li>Regularly update your Docker images to include security patches.</li>
+<li>Use Docker Compose for managing multi-container applications.</li>
+</ol>
+<p>For more advanced usage and best practices, refer to the <a href="https://docs.docker.com/">Docker documentation</a>.</p>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../R/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

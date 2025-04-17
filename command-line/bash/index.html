@@ -1,0 +1,439 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/command-line/bash/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Bash Scripting - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Bash Scripting";
+        var mkdocs_page_input_path = "command-line/bash.md";
+        var mkdocs_page_url = "/how-to/command-line/bash/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Bash Scripting</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#start-with-a-shebang">Start with a shebang</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#executing-scripts">Executing scripts</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#special-variables-and-commands">Special Variables and Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#update-and-upgrade-everything-on-ubuntu">Update and Upgrade Everything on Ubuntu</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#special-text-inside-bash-scripts">Special text inside bash scripts</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#multi-line-comments">Multi-line Comments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#here-documents">Here Documents</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#more-useful-commands">More useful commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#loop-across-files-of-the-same-extension">Loop across files of the same extension</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#safely-change-directories">Safely change directories</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#correctly-define-functions">Correctly define functions</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Command line</li>
+      <li class="breadcrumb-item active">Bash Scripting</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/command-line/bash.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Linux and the Command Line"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="../file-types/" class="btn btn-neutral float-right" title="File Types">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="bash-scripting">Bash Scripting</h1>
+<p><a href="https://google.github.io/styleguide/shellguide.html">Google</a>
+recommends using <code>bash</code> for all executable shell scripts:</p>
+<blockquote>
+<p>Restricting all executable shell scripts to <code>bash</code> gives us a consistent
+shell language that's installed on all our machines. In particular, this
+means there is generally no need to strive for POSIX-compatibility or
+otherwise avoid "bashisms".</p>
+</blockquote>
+<h2 id="start-with-a-shebang">Start with a shebang</h2>
+<p>The shebang is the first line of a script and tells the system which interpreter
+to use to run the script. For <code>bash</code> scripts, use <code>#!/bin/bash</code>:</p>
+<pre class="highlight"><code class="language-sh">#!/bin/bash
+# After the shebang, add comments to describe the script
+echo "Hello, world!"</code></pre>
+<p>You may see other shebangs like <code>#!/bin/sh</code> or <code>#!/usr/bin/env bash</code>. The former
+uses the system's default shell, which may not be <code>bash</code>. The latter is more
+portable as it can find <code>bash</code> in different locations.</p>
+<h3 id="executing-scripts">Executing scripts</h3>
+<p>To execute a script from the command line, you can manually invoke the
+interpreter with <code>bash &lt;filename&gt;</code> or you can make the file executable:</p>
+<pre class="highlight"><code class="language-sh">chmod +x /path/to/script.sh</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use the command <code>ls -l</code>, you'll see an <code>x</code> in the permissions column
+for the script. More about that <a href="https://www.geeksforgeeks.org/how-to-set-file-permissions-in-linux/">here</a>.</p>
+</div>
+<p>Then run it:</p>
+<pre class="highlight"><code class="language-sh">./path/to/script.sh</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code>./</code> prefix is required to run scripts in the current directory.</p>
+</div>
+<p>Try saving the "Hello, world!" script above to a file and running it
+after making it executable. (The <code>.sh</code> extension is optional.)</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><code>man bash</code></li>
+<li><a href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html">Bash Reference Manual</a></li>
+<li><a href="https://mywiki.wooledge.org/BashGuide">Bash Guide</a></li>
+<li><a href="https://tldp.org/LDP/abs/html/">Advanced Bash-Scripting Guide</a></li>
+<li><a href="https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md">Safety First!</a></li>
+<li><a href="https://mywiki.wooledge.org/Bashism">Bashisms</a></li>
+<li><a href="https://mywiki.wooledge.org/BashPitfalls">Bash Pitfalls</a></li>
+<li><a href="https://mywiki.wooledge.org/BashFAQ/005">Arrays in Bash</a></li>
+<li><a href="https://stackoverflow.com/questions/430078/shell-script-templates">Shell Script Templates</a></li>
+<li><a href="https://www.talisman.org/~erlkonig/documents/commandname-extensions-considered-harmful/">Command Name Extensions Considered Harmful</a></li>
+</ul>
+<p>For a quick reference, check out <a href="https://devhints.io/bash">DevHints.io</a>.</p>
+<h2 id="special-variables-and-commands">Special Variables and Commands</h2>
+<p>Special variables and commands can be very useful in <code>bash</code> scripts,
+particularly for interacting with command history:</p>
+<!-- markdownlint-disable MD013 -->
+
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!!</code></td>
+<td>Repeat the last command.</td>
+</tr>
+<tr>
+<td><code>!$</code></td>
+<td>Last argument of the last command.</td>
+</tr>
+<tr>
+<td><code>$_</code></td>
+<td>Last argument of the last command.</td>
+</tr>
+<tr>
+<td><code>!^</code></td>
+<td>First argument of the last command.</td>
+</tr>
+<tr>
+<td><code>$?</code></td>
+<td>Exit status of the last command.</td>
+</tr>
+<tr>
+<td><code>!n</code></td>
+<td>Repeat command number <code>n</code> from history.</td>
+</tr>
+<tr>
+<td><code>!!:n</code></td>
+<td>The <code>n</code>-th argument of the last command.</td>
+</tr>
+<tr>
+<td><code>!!:s/old/new/</code></td>
+<td>Substitute <code>old</code> with <code>new</code> in the last command.</td>
+</tr>
+<tr>
+<td><code>!cmd</code></td>
+<td>Run the most recent command starting with <code>cmd</code>.</td>
+</tr>
+<tr>
+<td><code>!+</code></td>
+<td>Next command in the history list (after the current one).</td>
+</tr>
+<tr>
+<td><code>!-n</code></td>
+<td>The command <code>n</code> lines before the current command in history.</td>
+</tr>
+<tr>
+<td><code>!!:p</code></td>
+<td>Print the last command without executing it.</td>
+</tr>
+<tr>
+<td><code>!!:x</code></td>
+<td>Extract and display the <code>x</code>-th argument of the last command.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples">Examples</h3>
+<p>You ran a command without <code>sudo</code> and want to run it again with <code>sudo</code>:</p>
+<pre class="highlight"><code class="language-sh">$ apt update
+E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)
+$ sudo !!</code></pre>
+<p>You performed a dry run with <code>echo</code> and want to run the command for real:</p>
+<pre class="highlight"><code class="language-sh">echo sudo apt-get install -y vim
+!:2-*</code></pre>
+<h2 id="update-and-upgrade-everything-on-ubuntu">Update and Upgrade Everything on Ubuntu</h2>
+<p>To update and upgrade all packages:</p>
+<pre class="highlight"><code class="language-sh">sudo apt-get update &amp;&amp; sudo apt-get upgrade -y</code></pre>
+<p>Alternatively:</p>
+<pre class="highlight"><code class="language-sh">yes | sudo sh -c 'apt update &amp;&amp; apt upgrade &amp;&amp; apt dist-upgrade \
+                 &amp;&amp; apt autoremove &amp;&amp; apt autoclean &amp;&amp; apt clean'</code></pre>
+<h2 id="special-text-inside-bash-scripts">Special text inside <code>bash</code> scripts</h2>
+<h3 id="multi-line-comments">Multi-line Comments</h3>
+<p>To add multi-line comments in <code>bash</code>, use the following syntax:</p>
+<pre class="highlight"><code class="language-sh">: '
+This is a
+very neat comment
+in bash
+'</code></pre>
+<h3 id="here-documents">Here Documents</h3>
+<p>A here document allows you to pass multiple lines of input to a command without storing it in a file:</p>
+<pre class="highlight"><code class="language-sh">cat &lt;&lt;EOF
+This is a here document.
+It can be used to pass multiple lines of input to a command.
+EOF</code></pre>
+<h3 id="more-useful-commands">More useful commands</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ssh user@host 'bash -s' &lt; script.sh</td>
+<td>Run a local script on a remote machine.</td>
+</tr>
+<tr>
+<td>md5sum ./*.fastq.gz &gt; md5sums.txt</td>
+<td>Generate a file with the MD5 checksums of all files in the current directory.</td>
+</tr>
+<tr>
+<td>md5sum -c md5sums.txt</td>
+<td>Check files against the MD5 checksums in a file.</td>
+</tr>
+<tr>
+<td>du -ha --max-depth=1</td>
+<td>Check the total size of each folder in the current directory.</td>
+</tr>
+<tr>
+<td>free -h</td>
+<td>Check current memory usage.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="loop-across-files-of-the-same-extension">Loop across files of the same extension</h2>
+<p>Don't use <code>ls</code> or <code>find</code>. Instead, use a glob pattern:</p>
+<pre class="highlight"><code class="language-sh">for file in ./*.bam; do # Loop across all .bsudoam files in the current directory
+ command "$file"        # Quote the variable to handle spaces in filenames
+done
+
+# single-line loop
+for file in ./*.bam; do command "$file"; done</code></pre>
+<p><a href="https://mywiki.wooledge.org/BashPitfalls#for_f_in_.24.28ls_.2A.mp3.29">source</a></p>
+<h2 id="safely-change-directories">Safely change directories</h2>
+<p>Don't <code>cd</code> without checking if it was successful!
+You might end up executing commands in the wrong directory.</p>
+<pre class="highlight"><code class="language-sh">cd /path/to/some/dir || exit # Exit if the directory doesn't exist or is inaccessible
+rm -rf *                     # This could be very bad if the cd failed</code></pre>
+<p><a href="https://mywiki.wooledge.org/BashPitfalls#cd_.2Ffoo.3B_bar">source</a></p>
+<h2 id="correctly-define-functions">Correctly define functions</h2>
+<p>Don't use <code>function</code> to define functions! It's ugly and not portable.
+Just use the function name followed by parentheses. We'll know it's a function.</p>
+<pre class="highlight"><code class="language-sh"># bad
+function myfunc {
+ echo "Hello, world!"
+}
+
+# very bad
+function myfunc() {
+ echo "Hello, world!"
+}
+
+# good
+myfunc() {
+ echo "Hello, world!"
+}</code></pre>
+<p><a href="https://mywiki.wooledge.org/BashPitfalls#function_foo.28.29">source</a></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To define single-line functions, add a semicolon before the closing brace:</p>
+<p><code>myfunc() { echo "Hello, world!"; }</code></p>
+</div>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../file-types/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

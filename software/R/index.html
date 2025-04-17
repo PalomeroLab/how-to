@@ -1,0 +1,327 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/software/R/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>R, RStudio, and RStudio Server - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "R, RStudio, and RStudio Server";
+        var mkdocs_page_input_path = "software/R.md";
+        var mkdocs_page_url = "/how-to/software/R/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">R, RStudio, and RStudio Server</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#docker-containers-for-bioconductor">Docker containers for Bioconductor</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#bioconductor-bioc-run-script">Bioconductor bioc-run script</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#connecting-to-rstudio-server">Connecting to RStudio Server</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#package-management">Package Management</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#installing-packages">Installing Packages</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#renv-r-environment-management">renv: R Environment Management</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interesting-facts-and-advanced-topics">Interesting Facts and Advanced Topics</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Software</li>
+      <li class="breadcrumb-item active">R, RStudio, and RStudio Server</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/software/R.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../Docker/" class="btn btn-neutral float-left" title="Docker"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="../bioconda/" class="btn btn-neutral float-right" title="Bioconda and Micromamba">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="r-rstudio-and-rstudio-server">R, RStudio, and RStudio Server</h1>
+<h2 id="overview">Overview</h2>
+<p>R is a programming language and environment for statistical graphics.</p>
+<p>RStudio is an integrated development environment (IDE) for R, providing a
+console, syntax-highlighting editor, and tools for plotting, debugging, and
+workspace management.</p>
+<p>RStudio Server is a version of RStudio that runs on a remote server and is
+accessed through a web browser, ideal for cloud-based or shared computing
+environments.</p>
+<h2 id="installation">Installation</h2>
+<p>Use the docker image <code>rocker/rstudio</code> to run RStudio Server in a containerized
+environment. You can pull the image from Docker Hub and run it with the
+following command:</p>
+<pre class="highlight"><code class="language-sh">docker run -d -p 8787:8787 -e PASSWORD=yourpasswordhere rocker/rstudio</code></pre>
+<h2 id="docker-containers-for-bioconductor">Docker containers for Bioconductor</h2>
+<p>Alternatively, you can use Bioconductor's Docker images,</p>
+<pre class="highlight"><code class="language-sh">docker run \
+ -e PASSWORD=bioc \
+ -p 8787:8787 \
+ bioconductor/bioconductor_docker:devel
+</code></pre>
+<p>Read the <a href="https://bioconductor.org/help/docker/">docs</a> for more information.</p>
+<h3 id="bioconductor-bioc-run-script">Bioconductor bioc-run script</h3>
+<p>For your convenience, you can use the <code>bioc-run</code> script to run Bioconductor
+without having to remember the docker command. Download and install it with:</p>
+<pre class="highlight"><code class="language-sh">mkdir -p ~/.local/bin
+curl https://raw.githubusercontent.com/Bioconductor/bioc-run/refs/heads/devel/bioc-run &gt; ~/.local/bin/bioc-run
+chmod +x ~/.local/bin/bioc-run
+echo 'export PATH=$PATH:~/.local/bin' &gt;&gt; ~/.bashrc
+exec "$SHELL"</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Prerequisites: <code>bash</code> and <code>jq</code></p>
+<p>If you use another shell like <code>zsh</code>, replace <code>~/.bashrc</code> with <code>~/.zshrc</code>, or
+another appropriate configuration file for your shell.</p>
+</div>
+<h2 id="connecting-to-rstudio-server">Connecting to RStudio Server</h2>
+<p>Find your EC2 instance's public IP address in the AWS console. Ensure that
+inbound traffic on port 8787 is allowed in the EC2 security group settings.
+Access RStudio Server by navigating to <code>http://ec2-public-ip:8787</code> in your web
+browser.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RStudio Server uses the underlying Linux system's user accounts.
+If not using a docker conntainer, the default <code>ubuntu</code> user doesn't have a
+password set, so create one frist with <code>sudo passwd ubuntu</code>.</p>
+</div>
+<h2 id="package-management">Package Management</h2>
+<h3 id="installing-packages">Installing Packages</h3>
+<p>For system-wide package installation, ensure you have the necessary build tools:</p>
+<pre class="highlight"><code class="language-sh">sudo apt update &amp;&amp; sudo apt install build-essential</code></pre>
+<p>To install specific versions of R packages:</p>
+<pre class="highlight"><code class="language-r">install.packages("remotes")
+remotes::install_version("Seurat", version = "4.4.1")</code></pre>
+<h3 id="renv-r-environment-management">renv: R Environment Management</h3>
+<p>renv is a package management tool for R that creates project-specific libraries, ensuring reproducibility across different environments.</p>
+<p>Setting up renv:</p>
+<pre class="highlight"><code class="language-r">install.packages("renv")
+renv::init()</code></pre>
+<p>Using renv:</p>
+<pre class="highlight"><code class="language-r">install.packages("dplyr")  # Install packages as usual
+renv::snapshot()  # Snapshot your project's state
+renv::restore()  # Restore your project's state on another machine</code></pre>
+<p>Best practices with renv:</p>
+<ul>
+<li>Commit <code>renv.lock</code> to version control.</li>
+<li>Use <code>renv::status()</code> to check for unsaved changes in your project's package list.</li>
+<li>Regularly update your snapshot with <code>renv::snapshot()</code>.</li>
+</ul>
+<p>RStudio provides visual cues for renv usage in the "Packages" pane and access to common renv functions through the "renv" menu.</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>If <code>renv::restore()</code> fails, check for package conflicts and ensure necessary
+system libraries are installed. If <code>sessionInfo()</code> shows unexpected packages,
+check your <code>.Rprofile</code> for auto-loaded packages and verify you're in the correct
+project environment.</p>
+<h2 id="interesting-facts-and-advanced-topics">Interesting Facts and Advanced Topics</h2>
+<ol>
+<li>
+<p>R's origins: R was created by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand, and is named after the first letter of its creators' names. <a href="https://www.r-project.org/about.html">Source: R-project.org</a></p>
+</li>
+<li>
+<p>RStudio's impact: RStudio (now Posit) has significantly contributed to R's popularity. The RStudio IDE is used by an estimated 2.5 million people worldwide. <a href="https://posit.co/about/">Source: Posit</a></p>
+</li>
+<li>
+<p>R in research: R is widely used in academic research. A study found that R was mentioned in over 400,000 scholarly articles between 2011-2020. <a href="https://spectrum.ieee.org/the-top-programming-languages-2020">Source: IEEE Spectrum</a></p>
+</li>
+<li>
+<p>Parallel computing in R: You can leverage multi-core processors for faster computations using packages like <code>parallel</code> and <code>foreach</code>. <a href="https://cran.r-project.org/web/views/HighPerformanceComputing.html">Source: CRAN Task View</a></p>
+</li>
+<li>
+<p>R Markdown: This powerful tool allows you to create dynamic documents that combine code, results, and narrative text. It's excellent for reproducible research. <a href="https://bookdown.org/yihui/rmarkdown/">Source: R Markdown book</a></p>
+</li>
+<li>
+<p>Shiny: A web application framework for R that allows you to create interactive web apps directly from R. It's widely used for creating dashboards and data exploration tools. <a href="https://shiny.posit.co/">Source: Shiny by Posit</a></p>
+</li>
+<li>
+<p>Configuring RStudio Server for multiple users: You can set up RStudio Server to support multiple users, each with their own workspace and permissions. <a href="https://docs.posit.co/ide/server-pro/settings/server_management.html">Source: RStudio Server Admin Guide</a></p>
+</li>
+<li>
+<p>Setting up RStudio Server with SSL: For secure connections, especially important in cloud environments, you can configure RStudio Server to use SSL. <a href="https://docs.posit.co/ide/server-pro/access_and_security/ssl.html">Source: RStudio Server Secure Socket Layer (SSL) Guide</a></p>
+</li>
+<li>
+<p>Integrating RStudio Server with version control: RStudio Server can be integrated with Git and SVN for version control, enhancing collaboration and code management. <a href="https://support.posit.co/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN">Source: RStudio Support - Version Control</a></p>
+</li>
+<li>
+<p>R Consortium: The R Consortium, supported by the Linux Foundation, funds development of R-related projects and organizes conferences. It includes major tech companies as members. <a href="https://www.r-consortium.org/">Source: R Consortium</a></p>
+</li>
+</ol>
+<p>For more detailed information, refer to the <a href="https://docs.rstudio.com/">official RStudio documentation</a> and <a href="https://rstudio.github.io/renv/">renv documentation</a>.</p>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../Docker/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../bioconda/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

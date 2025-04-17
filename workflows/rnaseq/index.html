@@ -1,0 +1,404 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/workflows/rnaseq/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>RNA Sequencing Analysis - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "RNA Sequencing Analysis";
+        var mkdocs_page_input_path = "workflows/rnaseq.md";
+        var mkdocs_page_url = "/how-to/workflows/rnaseq/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../amazon-web-services/s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">RNA Sequencing Analysis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#pre-requisites">Pre-requisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#featurecounts">featureCounts</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#input">Input</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#output">Output</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#downstream-analysis-using-r">Downstream Analysis using R</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#normalization">Normalization</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tpm-transcripts-per-million">TPM (Transcripts Per Million)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rpkmfpkm">RPKM/FPKM</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#code-example">Code example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#r-packages">R Packages</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#deseq2">DESeq2</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tuxedo-suite">Tuxedo Suite</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#references">References</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Workflows</li>
+      <li class="breadcrumb-item active">RNA Sequencing Analysis</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/workflows/rnaseq.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../ChIP-Seq/" class="btn btn-neutral float-left" title="ChIP-seq Analysis"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="rna-sequencing-analysis">RNA Sequencing Analysis</h1>
+<p>RNA sequencing (RNA-seq) is a technique used to analyze the <em>transcriptome</em> —
+the complete set of RNA transcripts in a cell. This method involves sequencing
+RNA molecules after reverse transcription to cDNA to examine gene expression levels
+and identify novel transcripts.</p>
+<h2 id="pre-requisites">Pre-requisites</h2>
+<p>Before starting the analysis, ensure you have the following:</p>
+<ul>
+<li>Aligned reads in SAM/BAM/CRAM format</li>
+<li>A reference annotation file in GTF or GFF format</li>
+<li>A read quantification tool such as featureCounts or HTSeq</li>
+</ul>
+<p>This document describes two pipelines for RNA-seq analysis:</p>
+<ul>
+<li>Using <code>featureCounts</code> and then analyzing with DESeq2 in R</li>
+<li>Using the Tuxedo Suite (HISAT2, StringTie, Ballgown)</li>
+</ul>
+<h2 id="featurecounts"><code>featureCounts</code></h2>
+<p><a href="https://subread.sourceforge.net/featureCounts.html"><code>featureCounts</code></a>
+is a program for counting reads mapped to genomic features, such as genes, exons,
+and promoters. It is part of the <a href="https://subread.sourceforge.net">Subread</a>
+package and can be used for RNA-seq as well as DNA-seq analysis.</p>
+<blockquote>
+<p>featureCounts takes as input SAM/BAM files and an annotation file including
+chromosomal coordinates of features. It outputs numbers of reads assigned to features
+(or meta-features). It also outputs stat info for the overall summrization results,
+including number of successfully assigned reads and number of reads that failed to be
+assigned due to various reasons (these reasons are included in the stat info).</p>
+</blockquote>
+<p>Use FeatureCounts to count the number of reads that map to each gene in a GTF
+file and summarize the results for downstream analysis (i.e., differential expression).</p>
+<h3 id="input">Input</h3>
+<p>Aligned reads in BAM format and a GTF file containing genomic features.</p>
+<p>Example usage:</p>
+<pre class="highlight"><code class="language-sh">featureCounts -T "$NUM_THREADS" --verbose -t exon -g gene_id --countReadPairs \
+  -a "$REF_GTF" -p -P -C -B -o "${OUT_DIR}/${OUT_PREFIX}.tsv" ./*.bam</code></pre>
+<p>Or, more simply:</p>
+<pre class="highlight"><code class="language-sh">featureCounts -a ${ANNOTATION} -p --countReadPairs -T$(nproc) -o total_counts.txt ./*.bam</code></pre>
+<p>Annotation file from <code>seqs_for_alignment_pipelines.ucsc_ids/</code></p>
+<ul>
+<li>GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.gff.gz 2024-09-10 13:15 74M</li>
+<li>GCA_000001405.15_GRCh38_full_analysis_set.refseq_annotation.gtf.gz</li>
+</ul>
+<h3 id="output">Output</h3>
+<p>Feature counts are written to a tab-delimited file (<code>.tsv</code> or <code>.txt</code>)
+with columns for each sample. You can import this file into R or other
+statistical software for further analysis.</p>
+<p>Feature counts also provide a summary of the number of reads that were
+assigned to features, as well as the number of reads that were not assigned
+to any feature.</p>
+<h3 id="downstream-analysis-using-r">Downstream Analysis using R</h3>
+<p>Export the results from <code>featureCounts</code> to R for further analysis, such as
+differential expression analysis using packages like DESeq2 or edgeR.</p>
+<h2 id="normalization">Normalization</h2>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Without between sample normalization NONE of these units are comparable across experiments.
+This is a result of RNA-Seq being a relative measurement, not an absolute one.
+<a href="https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/">Source</a>.</p>
+</div>
+<p><strong>Counts</strong> usually refers to the number of reads that align to a particular feature ($X_i).
+These numbers are heavily dependent on two things:</p>
+<ul>
+<li>The amount of fragments you sequenced (this is related to relative abundances).</li>
+<li>The length of the feature, or more appropriately, the <em>effective length</em>.</li>
+</ul>
+<p>Effective length refers to the number of possible start sites a feature could
+have generated a fragment of that particular length.</p>
+<p>Since counts are NOT scaled by the length of the feature, all units in this
+category are not comparable within a sample without adjusting for the feature
+length. This means you can’t sum the counts over a set of features to get the
+expression of that set (e.g. you can’t sum isoform counts to get gene counts).</p>
+<h3 id="tpm-transcripts-per-million">TPM (Transcripts Per Million)</h3>
+<p>Transcripts per million (TPM) is a measurement of the proportion of transcripts
+in your pool of RNA.</p>
+<h3 id="rpkmfpkm">RPKM/FPKM</h3>
+<p>Reads per kilobase of exon per million reads mapped (RPKM), or the more generic
+FPKM (substitute reads with fragments) are essentially the same thing.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>FPKM is not $2 *$ RPKM if you have paired-end reads. FPKM $==$ RPKM if you have single-end reads,
+and saying RPKM when you have paired-end reads is incorrect.</p>
+</div>
+<!-- TODO: add formulae -->
+
+<h3 id="code-example">Code example</h3>
+<pre class="highlight"><code class="language-R">countToTpm &lt;- function(counts, effLen)
+{
+    rate &lt;- log(counts) - log(effLen)
+    denom &lt;- log(sum(exp(rate)))
+    exp(rate - denom + log(1e6))
+}
+
+countToFpkm &lt;- function(counts, effLen)
+{
+    N &lt;- sum(counts)
+    exp( log(counts) + log(1e9) - log(effLen) - log(N) )
+}
+
+fpkmToTpm &lt;- function(fpkm)
+{
+    exp(log(fpkm) - log(sum(fpkm)) + log(1e6))
+}
+
+countToEffCounts &lt;- function(counts, len, effLen)
+{
+    counts * (len / effLen)
+}</code></pre>
+<h2 id="r-packages">R Packages</h2>
+<h3 id="deseq2">DESeq2</h3>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DESeq2</a> is an
+R package for differential gene expression analysis based on the negative
+binomial distribution.</p>
+<blockquote>
+<p>DESeq2 provides methods to test for differential expression by use of negative
+binomial generalized linear models. The models use the raw counts as input and
+perform regularized log transformation and variance stabilizing
+transformation. The package also provides functions to visualize the data and
+results.</p>
+</blockquote>
+<h2 id="tuxedo-suite">Tuxedo Suite</h2>
+<p>The Tuxedo Suite is a collection of tools for transcript-level expression analysis of RNA-seq experiments.</p>
+<ol>
+<li>Align reads to the reference genome and sort to BAM format (HISAT2)</li>
+<li>Assemble transcripts (StringTie)</li>
+<li>Prepare for differential expression analysis (Ballgown setup)</li>
+<li>Perform differential expression analysis</li>
+<li>Visualize results</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Description</th>
+<th>Manual</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HISAT2</td>
+<td>Align reads to reference genome</td>
+<td><a href="https://daehwankimlab.github.io/hisat2/manual/">manual</a></td>
+<td><a href="https://github.com/DaehwanKimLab/hisat2">source</a></td>
+</tr>
+<tr>
+<td>StringTie</td>
+<td>Assemble RNA-Seq alignments into transcripts</td>
+<td><a href="https://ccb.jhu.edu/software/stringtie/index.shtml">manual</a></td>
+<td><a href="https://github.com/gpertea/stringtie">source</a></td>
+</tr>
+<tr>
+<td>Ballgown</td>
+<td>Isoform-level differential expression analysis</td>
+<td><a href="https://bioconductor.org/packages/release/bioc/html/ballgown.html">manual</a></td>
+<td><a href="https://github.com/alyssafrazee/ballgown">source</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>StringTie comes packaged with <code>gffcompare</code> for comparing and evaluating the
+accuracy of RNA-seq transcript assemblers. Read the
+<a href="https://ccb.jhu.edu/software/stringtie/gffcompare.shtml">manual</a> for details.</p>
+</div>
+<p>Using Ballgown:</p>
+<ol>
+<li>Filter to remove low-abundance genes</li>
+<li>Identify differentially expressed transcripts and genes</li>
+<li>Add gene names</li>
+<li>Sort by p-value</li>
+<li>Write results to file</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li>Liao Y, Smyth GK, Shi W. featureCounts: an efficient general purpose program for assigning sequence reads to genomic features. Bioinformatics. 2014;30(7):923-30. <a href="https://pubmed.ncbi.nlm.nih.gov/24227677/">PMID: 24227677</a></li>
+<li>Pertea, M., Kim, D., Pertea, G. M., Leek, J. T., &amp; Salzberg, S. L. (2016). Transcript-level expression analysis of RNA-seq experiments with HISAT, StringTie and Ballgown. Nature Protocols, 11(9), 1650–1667. <a href="https://pubmed.ncbi.nlm.nih.gov/27560171/">PMID: 27560171</a></li>
+<li>Kim D, Langmead B, Salzberg SL. HISAT: a fast spliced aligner with low memory requirements. Nat Methods. 2015;12(4):357-360. <a href="https://pubmed.ncbi.nlm.nih.gov/25751142/">PMID: 25751142</a></li>
+<li>Pertea M, Pertea GM, Antonescu CM, Chang TC, Mendell JT, Salzberg SL. StringTie enables improved reconstruction of a transcriptome from RNA-seq reads. Nat Biotechnol. 2015;33(3):290-295. <a href="https://pubmed.ncbi.nlm.nih.gov/25690850/">PMID: 25690850</a></li>
+<li>Frazee AC, Pertea G, Jaffe AE, Langmead B, Salzberg SL, Leek JT. Ballgown bridges the gap between transcriptome assembly and expression analysis. Nat Biotechnol. 2015;33(3):243-246. <a href="https://pubmed.ncbi.nlm.nih.gov/25748911/">PMID: 25748911</a></li>
+</ul>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../ChIP-Seq/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

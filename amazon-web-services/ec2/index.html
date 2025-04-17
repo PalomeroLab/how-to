@@ -1,0 +1,282 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/amazon-web-services/ec2/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>EC2 - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "EC2";
+        var mkdocs_page_input_path = "amazon-web-services/ec2.md";
+        var mkdocs_page_url = "/how-to/amazon-web-services/ec2/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../">Amazon Web Services</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">EC2</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#instance-types">Instance Types</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#connecting-to-ec2-instances">Connecting to EC2 Instances</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ssh">SSH</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ec2-serial-console">EC2 Serial Console</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cli-tools-for-ec2-interaction">CLI Tools for EC2 Interaction</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ssh-config">SSH Config</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#scp-secure-copy">SCP (Secure Copy)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rsync">Rsync</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tmux">Tmux</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#vim">Vim</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../software/samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../workflows/rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Amazon web services</li>
+      <li class="breadcrumb-item active">EC2</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/amazon-web-services/ec2.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../" class="btn btn-neutral float-left" title="Amazon Web Services"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="../iam/" class="btn btn-neutral float-right" title="IAM">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="ec2">EC2</h1>
+<p>EC2 instances are virtual servers that you can provision and manage in the cloud.</p>
+<h2 id="instance-types">Instance Types</h2>
+<p>EC2 provides a wide range of <a href="https://aws.amazon.com/ec2/instance-types/">instance types</a>
+optimized for various use cases:</p>
+<ul>
+<li>General Purpose</li>
+<li>Compute Optimized</li>
+<li>Memory Optimized</li>
+<li>Accelerated Computing</li>
+<li>Storage Optimized</li>
+</ul>
+<p>Choose the instance type based on your application's requirements.</p>
+<h2 id="connecting-to-ec2-instances">Connecting to EC2 Instances</h2>
+<h3 id="ssh">SSH</h3>
+<p>To connect via SSH, ensure you have the private key associated with the instance:</p>
+<pre class="highlight"><code class="language-sh">chmod 400 /path/to/private-key.pem
+ssh -i /path/to/private-key.pem ec2-user@ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com</code></pre>
+<h3 id="ec2-serial-console">EC2 Serial Console</h3>
+<p>For instances that support it (typically those running on AWS Nitro System):</p>
+<ol>
+<li>Go to the <a href="https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#Instances:instanceState=running">EC2 Console</a></li>
+<li>Select the instance</li>
+<li>Click <code>Connect</code> &gt; <code>EC2 Serial Console</code> &gt; <code>Connect</code></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no login prompt appears, try pressing <code>Enter</code>.</p>
+</div>
+<h2 id="quickstart">Quickstart</h2>
+<p>Fresh EC2 instances don't come with aws cli:</p>
+<pre class="highlight"><code class="language-sh"></code></pre>
+<h2 id="cli-tools-for-ec2-interaction">CLI Tools for EC2 Interaction</h2>
+<h3 id="ssh-config">SSH Config</h3>
+<p>Optimize your SSH connections by editing <code>~/.ssh/config</code>:</p>
+<pre class="highlight"><code>Host aws-instance
+    Hostname ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com
+    User ec2-user
+    IdentityFile ~/.ssh/aws-key.pem</code></pre>
+<p>Now connect with: <code>ssh aws-instance</code></p>
+<h3 id="scp-secure-copy">SCP (Secure Copy)</h3>
+<p>Transfer files to/from your EC2 instance:</p>
+<pre class="highlight"><code class="language-sh"># Local to EC2
+scp localfile.txt aws-instance:~/
+
+# EC2 to Local
+scp aws-instance:~/remotefile.txt .</code></pre>
+<h3 id="rsync">Rsync</h3>
+<p>Synchronize directories:</p>
+<pre class="highlight"><code class="language-sh">rsync -avz --progress /local/dir/ aws-instance:/remote/dir/</code></pre>
+<h3 id="tmux">Tmux</h3>
+<p>For persistent sessions, use tmux. Connect with:</p>
+<pre class="highlight"><code class="language-sh">ssh -t aws-instance tmux attach</code></pre>
+<h3 id="vim">Vim</h3>
+<p>Edit remote files directly:</p>
+<pre class="highlight"><code class="language-sh">vim scp://aws-instance//path/to/remote/file</code></pre>
+<p>Copy current buffer to EC2:</p>
+<pre class="highlight"><code class="language-vim">:!scp % aws-instance:~/path/to/remote/file</code></pre>
+<h2 id="resources">Resources</h2>
+<p>For more information, refer to the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">EC2 User Guide</a></p>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../iam/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../extra.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

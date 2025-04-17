@@ -1,0 +1,294 @@
+<!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
+<!-- XXX: Don't auto-format this file! -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ryan D. Najac" /><link rel="canonical" href="https://palomerolab.github.io/how-to/amazon-web-services/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Amazon Web Services - Palomero Lab How-To</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+        <link href="../style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Amazon Web Services";
+        var mkdocs_page_input_path = "amazon-web-services/index.md";
+        var mkdocs_page_url = "/how-to/amazon-web-services/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Palomero Lab How-To
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">How do I science?</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About this guide</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Amazon web services</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Amazon Web Services</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#aws-cli-installation">AWS CLI Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#shell-completion-setup">Shell Completion Setup</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#bash">Bash</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#zsh">Zsh</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#aws-cli-configuration">AWS CLI Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cli-usage-examples">CLI Usage Examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#list-s3-buckets">List S3 Buckets</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#list-ec2-instances">List EC2 Instances</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#create-an-iam-user">Create an IAM User</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-json-parameters">Using JSON Parameters</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#jmespath-querying">JMESPath Querying</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#aws-cli-aliases">AWS CLI Aliases</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#references">References</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="ec2/">EC2</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="iam/">IAM</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="s3/">S3</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Command line</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../command-line/">Linux and the Command Line</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../command-line/bash/">Bash Scripting</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../command-line/file-types/">File Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../command-line/perl/">Perl Cheatsheet</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../command-line/ssh/">SSH (Secure Shell)</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Software</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../software/">Package Management</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../software/Docker/">Docker</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../software/R/">R, RStudio, and RStudio Server</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../software/bioconda/">Bioconda and Micromamba</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../software/jupyter/">Jupyter</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../software/samtools/">Samtools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Workflows</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../workflows/">Illumina Sequencing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../workflows/Azenta/">Azenta sFTP Data Delivery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../workflows/ChIP-Seq/">ChIP-seq Analysis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../workflows/rnaseq/">RNA Sequencing Analysis</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Palomero Lab How-To</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Amazon web services</li>
+      <li class="breadcrumb-item active">Amazon Web Services</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/palomeroLab/how-to/blob/main/docs/amazon-web-services/index.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+    <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Breadcrumb Navigation">
+        <a href="../about/" class="btn btn-neutral float-left" title="About this guide"><span class="icon icon-circle-arrow-left" aria-hidden="true"></span> Previous</a>
+        <a href="ec2/" class="btn btn-neutral float-right" title="EC2">Next <span class="icon icon-circle-arrow-right" aria-hidden="true"></span></a>
+    </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+
+                <h1 id="amazon-web-services">Amazon Web Services</h1>
+<p>This guide covers setting up and using the AWS Command Line Interface (CLI) for interacting with various AWS services.</p>
+<ul>
+<li><a href="s3/">S3 (Simple Storage Service)</a></li>
+<li><a href="ec2/">EC2 (Elastic Compute Cloud)</a></li>
+<li><a href="iam/">IAM (Identity and Access Management)</a></li>
+</ul>
+<h2 id="aws-cli-installation">AWS CLI Installation</h2>
+<p>For fresh Ubuntu instances:</p>
+<pre class="highlight"><code class="language-sh">curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip &amp;&amp; sudo ./aws/install &amp;&amp; rm -rf ./awscliv2.zip</code></pre>
+<p>For other operating systems, refer to the
+<a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">official installation guide</a>.</p>
+<h2 id="shell-completion-setup">Shell Completion Setup</h2>
+<p>Set up shell completion for the AWS CLI so you can use tab to autocomplete
+commands and options.</p>
+<h3 id="bash">Bash</h3>
+<p>Add to your <code>~/.bashrc</code>:</p>
+<pre class="highlight"><code class="language-sh">complete -C '/usr/local/bin/aws_completer' aws</code></pre>
+<h3 id="zsh">Zsh</h3>
+<p>Add to your <code>~/.zshrc</code>:</p>
+<pre class="highlight"><code class="language-sh">autoload bashcompinit &amp;&amp; bashcompinit
+autoload -Uz compinit &amp;&amp; compinit
+complete -C '/usr/local/bin/aws_completer' aws</code></pre>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you installed the AWS CLI in a different location, update the path
+accordingly. For example, if you installed it using homebrew, the path
+might be <code>/opt/homebrew/bin/aws_completer</code>.</p>
+</div>
+<h2 id="aws-cli-configuration">AWS CLI Configuration</h2>
+<p>Set up your AWS credentials:</p>
+<pre class="highlight"><code class="language-sh">aws configure</code></pre>
+<p>You'll be prompted for:</p>
+<ul>
+<li>AWS Access Key ID</li>
+<li>AWS Secret Access Key</li>
+<li>Default region name (e.g., us-east-1)</li>
+<li>Default output format (json, text, or table)</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can set up multiple profiles using <code>aws configure --profile profilename</code></p>
+</div>
+<h2 id="cli-usage-examples">CLI Usage Examples</h2>
+<h3 id="list-s3-buckets">List S3 Buckets</h3>
+<pre class="highlight"><code class="language-sh">aws s3 ls</code></pre>
+<h3 id="list-ec2-instances">List EC2 Instances</h3>
+<pre class="highlight"><code class="language-sh">aws ec2 describe-instances</code></pre>
+<h3 id="create-an-iam-user">Create an IAM User</h3>
+<pre class="highlight"><code class="language-sh">aws iam create-user --user-name newuser</code></pre>
+<h2 id="using-json-parameters">Using JSON Parameters</h2>
+<p>For complex API calls, you can use JSON files:</p>
+<pre class="highlight"><code class="language-sh">aws ec2 run-instances --cli-input-json file://ec2-params.json</code></pre>
+<h2 id="jmespath-querying">JMESPath Querying</h2>
+<p>Use <code>--query</code> to filter output:</p>
+<pre class="highlight"><code class="language-sh">aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,State.Name]'</code></pre>
+<h2 id="aws-cli-aliases">AWS CLI Aliases</h2>
+<p>Create shortcuts for common commands in <code>~/.aws/cli/alias</code>:</p>
+<pre class="highlight"><code>[toplevel]
+todays-instances = ec2 describe-instances --query 'Reservations[].Instances[?LaunchTime&gt;=`2023-01-01`]'</code></pre>
+<p>Use with: <code>aws todays-instances</code></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html">AWS CLI Command Reference</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/s3/index.html">S3 CLI Reference</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/index.html">EC2 CLI Reference</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/index.html">IAM CLI Reference</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/glacier/index.html">Glacier CLI Reference</a></li>
+</ul>
+              
+<small ><i>
+    Created by
+    <a href="https://rdnajac.tech/">Ryan D. Najac</a> for the
+    <a href="https://www.palomerolab.org/">Palomero Lab</a> at the
+    <a href="https://www.vagelos.columbia.edu/departments-centers/institute-cancer-genetics">Institute for Cancer Genetics</a >.
+    <br />
+    Page last updated on 2025-04-17.
+  </i></small >
+
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/palomeroLab/how-to/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../about/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="ec2/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../extra.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
