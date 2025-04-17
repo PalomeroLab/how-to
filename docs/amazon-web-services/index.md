@@ -12,7 +12,7 @@ For fresh Ubuntu instances:
 
 ```sh
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip && sudo ./aws/install && rm -rf ./awscliv2.zip ./aws
+unzip awscliv2.zip && sudo ./aws/install && rm -rf ./awscliv2.zip
 ```
 
 For other operating systems, refer to the
@@ -64,7 +64,7 @@ You'll be prompted for:
 > [!TIP]
 > You can set up multiple profiles using `aws configure --profile profilename`
 
-##  CLI Usage Examples
+## CLI Usage Examples
 
 ### List S3 Buckets
 

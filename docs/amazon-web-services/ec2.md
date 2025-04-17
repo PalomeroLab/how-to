@@ -7,11 +7,11 @@ EC2 instances are virtual servers that you can provision and manage in the cloud
 EC2 provides a wide range of [instance types](https://aws.amazon.com/ec2/instance-types/)
 optimized for various use cases:
 
-- General Purpose (e.g., t3, m5)
-- Compute Optimized (e.g., c5)
-- Memory Optimized (e.g., r5)
-- Accelerated Computing (e.g., p3, g4)
-- Storage Optimized (e.g., i3, d2)
+- General Purpose
+- Compute Optimized
+- Memory Optimized
+- Accelerated Computing
+- Storage Optimized
 
 Choose the instance type based on your application's requirements.
 
@@ -36,6 +36,14 @@ For instances that support it (typically those running on AWS Nitro System):
 
 > [!NOTE]
 > If no login prompt appears, try pressing `Enter`.
+
+## Quickstart
+
+Fresh EC2 instances don't come with aws cli:
+
+```sh
+
+```
 
 ## CLI Tools for EC2 Interaction
 
