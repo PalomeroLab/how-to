@@ -105,14 +105,12 @@ sudo visudo
 Uncomment or add these lines:
 
 ```sudoers
-# Members of the admin group may gain root privileges
-%admin ALL=(ALL) ALL
 
-# Allow members of group sudo to execute any command
+# Change this line...
 %sudo   ALL=(ALL:ALL) ALL
 
-# Add to run any command without a password
-username ALL=(ALL) NOPASSWD: ALL
+# ...to this
+%sudo ALL=(ALL:ALL) NOPASSWD: ALL
 ```
 
 ## Quick Reference of common Linux commands
