@@ -19,9 +19,9 @@ to use to run the script. For `bash` scripts, use `#!/bin/bash`:
 echo "Hello, world!"
 ```
 
-You may see other shebangs like `#!/bin/sh` or `#!/usr/bin/env bash`. The former
-uses the system's default shell, which may not be `bash`. The latter is more
-portable as it can find `bash` in different locations.
+You may see other shebangs like `#!/bin/sh` or `#!/usr/bin/env bash`.
+The former uses the system's default shell, which may not be `bash`.
+The latter is more portable as it can find `bash` in different locations.
 
 ### Executing scripts
 

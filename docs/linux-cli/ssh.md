@@ -53,9 +53,9 @@ ssh-copy-id -i <identity_file >username@hostname
 
 ```config
 Host hostname
-User username
-HostName hostname
-IdentityFile ~/.ssh/identity_file
+    User username
+    HostName hostname
+    IdentityFile ~/.ssh/identity_file
 ```
 
 Now you can log in without a password:
