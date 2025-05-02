@@ -12,7 +12,7 @@ For fresh Ubuntu instances:
 
 ```sh
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip && sudo ./aws/install && rm -rf ./awscliv2.zip
+unzip awscliv2.zip && sudo ./aws/install && rm -rfv ./awscliv2.zip ./aws
 ```
 
 For other operating systems, refer to the
@@ -110,6 +110,28 @@ todays-instances = ec2 describe-instances --query 'Reservations[].Instances[?Lau
 ```
 
 Use with: `aws todays-instances`
+
+## Profiles
+
+You can work with two accounts by creating two profiles on the aws command line.
+It will prompt you for your AWS Access Key ID, AWS Secret Access Key and desired
+region, so have them ready.
+
+> [Source](https://stackoverflow.com/a/34246053)
+
+```sh
+aws configure --profile profile1
+aws configure --profile profile2
+```
+
+Pass the `--profile` flag to the `aws` command to use the desired profile.
+
+```sh
+aws s3 ls --profile profile1 s3://bucket/only/profile1/can/access
+aws s3 ls --profile profile2 s3://bucket/only/profile2/can/access
+```
+
+If a profile is not specified, the default profile will be used.
 
 ## References
 

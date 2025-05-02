@@ -74,10 +74,6 @@ Illumina instruments will demultiplex the data for you if you provide a valid
 sample sheet prior to sequencing. For more information on how to create a sample
 sheet, consult the [Illumina Support](https://support.illumina.com/) page.
 
-Skip ahead to the [Quality Control](#quality-control) section if the
-FASTQ files are already demultiplexed and ready for analysis, or keep reading
-for instructions on how to demultiplex the data yourself.
-
 Illumina hosts `.rpm` files for CentOS/RedHat Linux distros and the
 source code (which must be compiled) for other distros.
 
@@ -96,16 +92,7 @@ sudo alien -i bcl2fastq2-v2.20.0.422-Linux-x86_64.rpm
 > As of 2024-08-05, `bcl2fastq` is no longer supported; use `bclconvert` instead.\
 > You can install `bclconvert` using the same methods as described above.
 
-Read the docs:
+## Resources
 
 - [bcl2fastq](https://support.illumina.com/content/dam/illumina-support/documents/documentation/software_documentation/bcl2fastq/bcl2fastq_letterbooklet_15038058brpmi.pdf)
 - [bclconvert](https://support-docs.illumina.com/SW/BCL_Convert_v4.0/Content/SW/BCLConvert/BCLConvert.htm)
-
-## Quality Control
-
-### FASTQC
-
-```sh
-mkdir -p ./fastqc
-for f in ./*.fastq.gz; do fastqc -o ./fastqc --noextract --memory 1024 "$f" & done; wait
-```
