@@ -1,6 +1,11 @@
 <!-- https://github.com/mkdocs/mkdocs/tree/master/mkdocs/themes/readthedocs -->
 <!-- XXX: Don't auto-format this file! -->
 {% extends "base.html" %}
+{% block extrahead %}
+{{ super() }}
+<link rel="stylesheet" href="{{ 'style.css'|url }}">
+<script src="{{ 'extra.js'|url }}"></script>
+{% endblock %}
 {% block content %}
 {{ super() }}
 <small ><i>
