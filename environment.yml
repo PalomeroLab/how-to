@@ -1,0 +1,9 @@
+name: how-to
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - mkdocs
+  - pip:
+      - -r requirements.txt
