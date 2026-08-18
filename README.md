@@ -1,12 +1,17 @@
-# how-to
+# Palomero Lab How-To
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-How to do stuff
+This repository ships the MkDocs theme and build configuration for the
+Palomero Lab how-to site. Pages live in
+[`docs/`](https://github.com/PalomeroLab/how-to/tree/main/docs) as plain
+markdown files; see
+[`docs/example.md`](https://github.com/PalomeroLab/how-to/blob/main/docs/example.md)
+for the features the theme supports (admonitions, tabs, fenced code with a
+copy button, and the last-updated macro).
 
-## About
-
-This is the repository for the documentation of how to do stuff.
+This file is published as the site's home page at the URL above
+(`docs/index.md` is a symlink to this README).
 
 ## Building
 

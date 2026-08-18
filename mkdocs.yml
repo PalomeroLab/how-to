@@ -1,18 +1,18 @@
 site_name: Palomero Lab How-To
 site_url: https://palomerolab.github.io/how-to/
-repo_url: https://github.com/rdnajac/PalomeroLab/
+repo_url: https://github.com/PalomeroLab/how-to/
 edit_uri: blob/main/docs/
 
-# The pages live in the palomerolab repository. This repository holds only the
-# theme and the build configuration.
-docs_dir: ../docs
+# This repository ships the theme, the build config, and an example page.
+# Pages go in docs/ as plain markdown files.
+docs_dir: docs
 site_description: A collection of how-to guides for the Palomero Lab
 site_author: Ryan D. Najac
 copyright: <a href="https://www.cuimc.columbia.edu/"><img src="https://github.com/PalomeroLab/how-to/blob/main/assets/CUIMC_Horizontal_Blue.png?raw=true" alt = "CUIMC Logo"></a><br>Copyright &copy; 2024 <a href="https://www.columbia.edu/">Columbia University</a>
 
-# Internal pages. They build, but they do not appear in the navigation.
-not_in_nav: |
-  /private/*
+nav:
+  - Home: index.md
+  - Example: example.md
 
 theme:
   name: readthedocs
@@ -22,6 +22,8 @@ theme:
 markdown_extensions:
   - markdown_gfm_admonition
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 plugins:
   - search
